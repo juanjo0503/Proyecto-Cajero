@@ -1,0 +1,31 @@
+@startuml
+annotation java.lang.Override
+annotation java.lang.SuppressWarnings
+class Main.main
+class bd.Conexion
+class com.mysql.cj.jdbc.exceptions.SQLError
+class java.awt.event.ActionEvent
+class java.awt.event.ActionListener
+class java.time.LocalDate
+class java.time.LocalTime
+class java.time.format.DateTimeFormatter
+class java.util.logging.Level
+class java.util.logging.Logger
+class javax.swing.JFrame
+class javax.swing.JOptionPane
+class javax.swing.Timer
+Main.main ..> java.lang.Override
+Main.main ..> java.lang.SuppressWarnings
+Main.main ..> bd.Conexion
+Main.main ..> com.mysql.cj.jdbc.exceptions.SQLError
+Main.main ..> java.awt.event.ActionEvent
+Main.main ..> java.awt.event.ActionListener
+Main.main ..> java.time.LocalDate
+Main.main ..> java.time.LocalTime
+Main.main ..> java.time.format.DateTimeFormatter
+Main.main ..> java.util.logging.Level
+Main.main ..> java.util.logging.Logger
+Main.main --|> javax.swing.JFrame
+Main.main ..> javax.swing.JOptionPane
+Main.main ..> javax.swing.Timer
+@enduml

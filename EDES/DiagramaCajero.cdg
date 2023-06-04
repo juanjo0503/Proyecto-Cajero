@@ -1,0 +1,849 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<ClassDiagram name="CajeroJuanjo">
+  <ClassDiagramComponents>
+    <Class name="Conexion" package="bd" visibility="public" xPosition="133.0" yPosition="61.0">
+      <Fields/>
+      <Constructors/>
+      <Methods>
+        <Method name="mySQL" returnType="java.sql.Connection" visibility="public" isStatic="true">
+          <Argument type="String" name="baseDatos"/>
+          <Argument type="String" name="username"/>
+          <Argument type="String" name="password"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="bienvenidos" package="Main" visibility="public" xPosition="144.0" yPosition="330.0">
+      <Fields>
+        <Field name="operaciones" type="operaciones" visibility="private"/>
+        <Field name="botones" type="javax.swing.JPanel" visibility="private"/>
+        <Field name="btn0" type="javax.swing.JButton" visibility="private"/>
+        <Field name="btn1" type="javax.swing.JButton" visibility="private"/>
+        <Field name="btn2" type="javax.swing.JButton" visibility="private"/>
+        <Field name="btn3" type="javax.swing.JButton" visibility="private"/>
+        <Field name="btn4" type="javax.swing.JButton" visibility="private"/>
+        <Field name="btn5" type="javax.swing.JButton" visibility="private"/>
+        <Field name="btn6" type="javax.swing.JButton" visibility="private"/>
+        <Field name="btn7" type="javax.swing.JButton" visibility="private"/>
+        <Field name="btn8" type="javax.swing.JButton" visibility="private"/>
+        <Field name="btn9" type="javax.swing.JButton" visibility="private"/>
+        <Field name="btnBorrar" type="javax.swing.JButton" visibility="private"/>
+        <Field name="btnConfirmar" type="javax.swing.JButton" visibility="private"/>
+        <Field name="btnRetroceder" type="javax.swing.JButton" visibility="private"/>
+        <Field name="jLabel1" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="jLabel6" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="jPanel7" type="javax.swing.JPanel" visibility="private"/>
+        <Field name="lblFecha" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="lblHora" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="nulo1" type="javax.swing.JButton" visibility="private"/>
+        <Field name="nulo2" type="javax.swing.JButton" visibility="private"/>
+        <Field name="numeros" type="javax.swing.JPanel" visibility="private"/>
+        <Field name="txfID" type="javax.swing.JTextField" visibility="private"/>
+        <Field name="txfPin" type="javax.swing.JTextField" visibility="private"/>
+        <Field name="conexion" type="Connection" visibility="package"/>
+        <Field name="sentencia" type="Statement" visibility="package"/>
+        <Field name="resultado" type="ResultSet" visibility="package"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public"/>
+      </Constructors>
+      <Methods>
+        <Method name="initVentana" returnType="void" visibility="private"/>
+        <Method name="esNumero" returnType="boolean" visibility="private">
+          <Argument type="String" name="s1"/>
+        </Method>
+        <Method name="initBD" returnType="void" visibility="private"/>
+        <Method name="initComponents" returnType="// &lt;editor-fold defaultstate=&quot;collapsed&quot; desc=&quot;Generated Code&quot;&gt;//GEN-BEGIN:initComponents void" visibility="private"/>
+        <Method name="btn1ActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="btn2ActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="btn3ActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="btn4ActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="btn5ActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="btn6ActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="btn7ActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="btn8ActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="btn9ActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="btn0ActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="btnRetrocederActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="btnBorrarActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="btnConfirmarActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="main" returnType="void" visibility="public" isStatic="true">
+          <Argument type="String" name="args"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="cambioPIN" package="Main" visibility="public" xPosition="2207.0" yPosition="1557.0">
+      <Fields>
+        <Field name="CambioCP" type="javax.swing.JTextField" visibility="private"/>
+        <Field name="CambioConfirmar" type="javax.swing.JButton" visibility="private"/>
+        <Field name="CambioNP" type="javax.swing.JTextField" visibility="private"/>
+        <Field name="CambioPA" type="javax.swing.JTextField" visibility="private"/>
+        <Field name="CambioRealizar" type="javax.swing.JButton" visibility="private"/>
+        <Field name="CambioSalir" type="javax.swing.JButton" visibility="private"/>
+        <Field name="botones" type="javax.swing.JPanel" visibility="private"/>
+        <Field name="btn0" type="javax.swing.JButton" visibility="private"/>
+        <Field name="btn1" type="javax.swing.JButton" visibility="private"/>
+        <Field name="btn2" type="javax.swing.JButton" visibility="private"/>
+        <Field name="btn3" type="javax.swing.JButton" visibility="private"/>
+        <Field name="btn4" type="javax.swing.JButton" visibility="private"/>
+        <Field name="btn5" type="javax.swing.JButton" visibility="private"/>
+        <Field name="btn6" type="javax.swing.JButton" visibility="private"/>
+        <Field name="btn7" type="javax.swing.JButton" visibility="private"/>
+        <Field name="btn8" type="javax.swing.JButton" visibility="private"/>
+        <Field name="btn9" type="javax.swing.JButton" visibility="private"/>
+        <Field name="btnBorrar" type="javax.swing.JButton" visibility="private"/>
+        <Field name="btnConfirmar" type="javax.swing.JButton" visibility="private"/>
+        <Field name="btnRetroceder" type="javax.swing.JButton" visibility="private"/>
+        <Field name="jLabel17" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="jLabel18" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="jLabel19" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="jPanel2" type="javax.swing.JPanel" visibility="private"/>
+        <Field name="jPanel3" type="javax.swing.JPanel" visibility="private"/>
+        <Field name="lblFecha1" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="lblHora1" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="nulo1" type="javax.swing.JButton" visibility="private"/>
+        <Field name="nulo2" type="javax.swing.JButton" visibility="private"/>
+        <Field name="numeros" type="javax.swing.JPanel" visibility="private"/>
+        <Field name="conexion" type="Connection" visibility="package"/>
+        <Field name="sentencia" type="Statement" visibility="package"/>
+        <Field name="sentencia2" type="Statement" visibility="package"/>
+        <Field name="resultado" type="ResultSet" visibility="package"/>
+        <Field name="resultado2" type="ResultSet" visibility="package"/>
+        <Field name="tarjeta" type="Tarjeta" visibility="package"/>
+        <Field name="cliente" type="Cliente" visibility="package"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public"/>
+      </Constructors>
+      <Methods>
+        <Method name="esNumero" returnType="boolean" visibility="private">
+          <Argument type="String" name="s1"/>
+        </Method>
+        <Method name="initVentana" returnType="void" visibility="private"/>
+        <Method name="initBD" returnType="void" visibility="private"/>
+        <Method name="initComponents" returnType="// &lt;editor-fold defaultstate=&quot;collapsed&quot; desc=&quot;Generated Code&quot;&gt;//GEN-BEGIN:initComponents void" visibility="private"/>
+        <Method name="btn1ActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="btn2ActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="btn3ActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="btn4ActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="btn5ActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="btn6ActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="btn7ActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="btn8ActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="btn9ActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="btn0ActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="btnBorrarActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="btnRetrocederActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="btnConfirmarActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="CambioRealizarActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="CambioSalirActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="CambioConfirmarActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="main" returnType="void" visibility="public" isStatic="true">
+          <Argument type="String" name="args"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="Cliente" package="Main" visibility="public" xPosition="1012.0" yPosition="114.0">
+      <Fields>
+        <Field name="numtarjeta" type="long" visibility="private"/>
+        <Field name="IBAN" type="String" visibility="private"/>
+        <Field name="nombre" type="String" visibility="private"/>
+        <Field name="direccion" type="String" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="long" name="numtarjeta"/>
+          <Argument type="String" name="IBAN"/>
+          <Argument type="String" name="nombre"/>
+          <Argument type="String" name="direccion"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="getNumtarjeta" returnType="long" visibility="public"/>
+        <Method name="setNumtarjeta" returnType="void" visibility="public">
+          <Argument type="int" name="numtarjeta"/>
+        </Method>
+        <Method name="getIBAN" returnType="String" visibility="public"/>
+        <Method name="setIBAN" returnType="void" visibility="public">
+          <Argument type="String" name="IBAN"/>
+        </Method>
+        <Method name="getNombre" returnType="String" visibility="public"/>
+        <Method name="setNombre" returnType="void" visibility="public">
+          <Argument type="String" name="nombre"/>
+        </Method>
+        <Method name="getDireccion" returnType="String" visibility="public"/>
+        <Method name="setDireccion" returnType="void" visibility="public">
+          <Argument type="String" name="direccion"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="estados" package="Main" visibility="public" xPosition="1318.0" yPosition="607.0">
+      <Fields>
+        <Field name="EstadoCambio" type="javax.swing.JButton" visibility="private"/>
+        <Field name="EstadoFecha" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="EstadoIBAN" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="EstadoImprimir" type="javax.swing.JButton" visibility="private"/>
+        <Field name="EstadoPropietario" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="EstadoSaldo" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="EstadoSalir" type="javax.swing.JButton" visibility="private"/>
+        <Field name="botones" type="javax.swing.JPanel" visibility="private"/>
+        <Field name="btn0" type="javax.swing.JButton" visibility="private"/>
+        <Field name="btn1" type="javax.swing.JButton" visibility="private"/>
+        <Field name="btn2" type="javax.swing.JButton" visibility="private"/>
+        <Field name="btn3" type="javax.swing.JButton" visibility="private"/>
+        <Field name="btn4" type="javax.swing.JButton" visibility="private"/>
+        <Field name="btn5" type="javax.swing.JButton" visibility="private"/>
+        <Field name="btn6" type="javax.swing.JButton" visibility="private"/>
+        <Field name="btn7" type="javax.swing.JButton" visibility="private"/>
+        <Field name="btn8" type="javax.swing.JButton" visibility="private"/>
+        <Field name="btn9" type="javax.swing.JButton" visibility="private"/>
+        <Field name="btnBorrar" type="javax.swing.JButton" visibility="private"/>
+        <Field name="btnConfirmar" type="javax.swing.JButton" visibility="private"/>
+        <Field name="btnRetroceder" type="javax.swing.JButton" visibility="private"/>
+        <Field name="jLabel20" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="jLabel21" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="jLabel23" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="jLabel26" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="jPanel4" type="javax.swing.JPanel" visibility="private"/>
+        <Field name="jPanel5" type="javax.swing.JPanel" visibility="private"/>
+        <Field name="lblFecha1" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="lblHora1" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="nulo1" type="javax.swing.JButton" visibility="private"/>
+        <Field name="nulo2" type="javax.swing.JButton" visibility="private"/>
+        <Field name="numeros" type="javax.swing.JPanel" visibility="private"/>
+        <Field name="conexion" type="Connection" visibility="package"/>
+        <Field name="sentencia" type="Statement" visibility="package"/>
+        <Field name="sentencia2" type="Statement" visibility="package"/>
+        <Field name="resultado" type="ResultSet" visibility="package"/>
+        <Field name="resultado2" type="ResultSet" visibility="package"/>
+        <Field name="tarjeta" type="Tarjeta" visibility="package"/>
+        <Field name="cliente" type="Cliente" visibility="package"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public"/>
+      </Constructors>
+      <Methods>
+        <Method name="esNumero" returnType="boolean" visibility="private">
+          <Argument type="String" name="s1"/>
+        </Method>
+        <Method name="initVentana" returnType="void" visibility="private"/>
+        <Method name="initBD" returnType="void" visibility="private"/>
+        <Method name="initComponents" returnType="// &lt;editor-fold defaultstate=&quot;collapsed&quot; desc=&quot;Generated Code&quot;&gt;//GEN-BEGIN:initComponents void" visibility="private"/>
+        <Method name="btn1ActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="btn2ActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="btn3ActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="btn4ActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="btn5ActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="btn6ActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="btn7ActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="btn8ActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="btn9ActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="btn0ActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="btnBorrarActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="btnRetrocederActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="btnConfirmarActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="EstadoCambioActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="EstadoSalirActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="main" returnType="void" visibility="public" isStatic="true">
+          <Argument type="String" name="args"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="ingresos" package="Main" visibility="public" xPosition="2549.0" yPosition="94.0">
+      <Fields>
+        <Field name="IngresoCambiar" type="javax.swing.JButton" visibility="private"/>
+        <Field name="IngresoCliente" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="IngresoConcepto" type="javax.swing.JTextField" visibility="private"/>
+        <Field name="IngresoConfirmar" type="javax.swing.JButton" visibility="private"/>
+        <Field name="IngresoImporte" type="javax.swing.JTextField" visibility="private"/>
+        <Field name="IngresoSalir" type="javax.swing.JButton" visibility="private"/>
+        <Field name="botones" type="javax.swing.JPanel" visibility="private"/>
+        <Field name="btn0" type="javax.swing.JButton" visibility="private"/>
+        <Field name="btn1" type="javax.swing.JButton" visibility="private"/>
+        <Field name="btn2" type="javax.swing.JButton" visibility="private"/>
+        <Field name="btn3" type="javax.swing.JButton" visibility="private"/>
+        <Field name="btn4" type="javax.swing.JButton" visibility="private"/>
+        <Field name="btn5" type="javax.swing.JButton" visibility="private"/>
+        <Field name="btn6" type="javax.swing.JButton" visibility="private"/>
+        <Field name="btn7" type="javax.swing.JButton" visibility="private"/>
+        <Field name="btn8" type="javax.swing.JButton" visibility="private"/>
+        <Field name="btn9" type="javax.swing.JButton" visibility="private"/>
+        <Field name="btnBorrar" type="javax.swing.JButton" visibility="private"/>
+        <Field name="btnConfirmar" type="javax.swing.JButton" visibility="private"/>
+        <Field name="btnRetroceder" type="javax.swing.JButton" visibility="private"/>
+        <Field name="jLabel12" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="jLabel4" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="jLabel5" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="jLabel7" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="jPanel12" type="javax.swing.JPanel" visibility="private"/>
+        <Field name="jPanel6" type="javax.swing.JPanel" visibility="private"/>
+        <Field name="lblFecha2" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="lblHora2" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="nulo1" type="javax.swing.JButton" visibility="private"/>
+        <Field name="nulo2" type="javax.swing.JButton" visibility="private"/>
+        <Field name="numeros" type="javax.swing.JPanel" visibility="private"/>
+        <Field name="conexion" type="Connection" visibility="package"/>
+        <Field name="sentencia" type="Statement" visibility="package"/>
+        <Field name="sentencia2" type="Statement" visibility="package"/>
+        <Field name="resultado" type="ResultSet" visibility="package"/>
+        <Field name="resultado2" type="ResultSet" visibility="package"/>
+        <Field name="tarjeta" type="Tarjeta" visibility="package"/>
+        <Field name="cliente" type="Cliente" visibility="package"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public"/>
+      </Constructors>
+      <Methods>
+        <Method name="esNumero" returnType="boolean" visibility="private">
+          <Argument type="String" name="s1"/>
+        </Method>
+        <Method name="initVentana" returnType="void" visibility="private"/>
+        <Method name="initBD" returnType="void" visibility="private"/>
+        <Method name="initDatos" returnType="void" visibility="private"/>
+        <Method name="initComponents" returnType="// &lt;editor-fold defaultstate=&quot;collapsed&quot; desc=&quot;Generated Code&quot;&gt;//GEN-BEGIN:initComponents void" visibility="private"/>
+        <Method name="btn1ActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="btn2ActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="btn3ActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="btn4ActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="btn5ActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="btn6ActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="btn7ActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="btn8ActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="btn9ActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="btn0ActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="btnBorrarActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="btnRetrocederActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="btnConfirmarActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="IngresoCambiarActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="IngresoConfirmarActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="IngresoSalirActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="main" returnType="void" visibility="public" isStatic="true">
+          <Argument type="String" name="args"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="Movimiento" package="Main" visibility="public" xPosition="1955.0" yPosition="163.0">
+      <Fields>
+        <Field name="idcliente" type="int" visibility="private"/>
+        <Field name="tipo" type="String" visibility="private"/>
+        <Field name="importe" type="double" visibility="private"/>
+        <Field name="fecha" type="String" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="int" name="idcliente"/>
+          <Argument type="String" name="tipo"/>
+          <Argument type="double" name="importe"/>
+          <Argument type="String" name="fecha"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="getIdcliente" returnType="int" visibility="public"/>
+        <Method name="setIdcliente" returnType="void" visibility="public">
+          <Argument type="int" name="idcliente"/>
+        </Method>
+        <Method name="getTipo" returnType="String" visibility="public"/>
+        <Method name="setTipo" returnType="void" visibility="public">
+          <Argument type="String" name="tipo"/>
+        </Method>
+        <Method name="getImporte" returnType="double" visibility="public"/>
+        <Method name="setImporte" returnType="void" visibility="public">
+          <Argument type="double" name="importe"/>
+        </Method>
+        <Method name="getFecha" returnType="String" visibility="public"/>
+        <Method name="setFecha" returnType="void" visibility="public">
+          <Argument type="String" name="fecha"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="operaciones" package="Main" visibility="public" xPosition="3736.0" yPosition="1336.0">
+      <Fields>
+        <Field name="t" type="Tarjeta" visibility="private"/>
+        <Field name="c" type="Cliente" visibility="private"/>
+        <Field name="ingreso" type="ingresos" visibility="private"/>
+        <Field name="retiro" type="retiros" visibility="private"/>
+        <Field name="cambio" type="cambioPIN" visibility="private"/>
+        <Field name="estado" type="estados" visibility="private"/>
+        <Field name="transferencia" type="transferencias" visibility="private"/>
+        <Field name="bienvenido" type="bienvenidos" visibility="private"/>
+        <Field name="acciones" type="javax.swing.JPanel" visibility="private"/>
+        <Field name="botones" type="javax.swing.JPanel" visibility="private"/>
+        <Field name="btn0" type="javax.swing.JButton" visibility="private"/>
+        <Field name="btn1" type="javax.swing.JButton" visibility="private"/>
+        <Field name="btn2" type="javax.swing.JButton" visibility="private"/>
+        <Field name="btn3" type="javax.swing.JButton" visibility="private"/>
+        <Field name="btn4" type="javax.swing.JButton" visibility="private"/>
+        <Field name="btn5" type="javax.swing.JButton" visibility="private"/>
+        <Field name="btn6" type="javax.swing.JButton" visibility="private"/>
+        <Field name="btn7" type="javax.swing.JButton" visibility="private"/>
+        <Field name="btn8" type="javax.swing.JButton" visibility="private"/>
+        <Field name="btn9" type="javax.swing.JButton" visibility="private"/>
+        <Field name="btnBorrar" type="javax.swing.JButton" visibility="private"/>
+        <Field name="btnCambiarPIN" type="javax.swing.JButton" visibility="private"/>
+        <Field name="btnConfirmar" type="javax.swing.JButton" visibility="private"/>
+        <Field name="btnEstado" type="javax.swing.JButton" visibility="private"/>
+        <Field name="btnIngreso" type="javax.swing.JButton" visibility="private"/>
+        <Field name="btnRetiro" type="javax.swing.JButton" visibility="private"/>
+        <Field name="btnRetroceder" type="javax.swing.JButton" visibility="private"/>
+        <Field name="btnSalir" type="javax.swing.JButton" visibility="private"/>
+        <Field name="btnTransferencia" type="javax.swing.JButton" visibility="private"/>
+        <Field name="lblFecha1" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="lblHora1" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="nulo1" type="javax.swing.JButton" visibility="private"/>
+        <Field name="nulo2" type="javax.swing.JButton" visibility="private"/>
+        <Field name="numeros" type="javax.swing.JPanel" visibility="private"/>
+        <Field name="conexion" type="Connection" visibility="package"/>
+        <Field name="sentencia" type="Statement" visibility="package"/>
+        <Field name="sentencia2" type="Statement" visibility="package"/>
+        <Field name="resultado" type="ResultSet" visibility="package"/>
+        <Field name="resultado2" type="ResultSet" visibility="package"/>
+        <Field name="tarjeta" type="Tarjeta" visibility="package"/>
+        <Field name="cliente" type="Cliente" visibility="package"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="Tarjeta" name="t"/>
+        </Constructor>
+        <Constructor visibility="private"/>
+      </Constructors>
+      <Methods>
+        <Method name="esNumero" returnType="boolean" visibility="private">
+          <Argument type="String" name="s1"/>
+        </Method>
+        <Method name="initVentana" returnType="void" visibility="private"/>
+        <Method name="initBD" returnType="void" visibility="private"/>
+        <Method name="initComponents" returnType="// &lt;editor-fold defaultstate=&quot;collapsed&quot; desc=&quot;Generated Code&quot;&gt;//GEN-BEGIN:initComponents void" visibility="private"/>
+        <Method name="btn1ActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="btn2ActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="btn3ActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="btn4ActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="btn5ActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="btn6ActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="btn7ActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="btn8ActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="btn9ActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="btn0ActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="btnBorrarActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="btnRetrocederActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="btnConfirmarActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="btnSalirActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="btnEstadoActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="btnCambiarPINActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="btnTransferenciaActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="btnRetiroActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="btnIngresoActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="main" returnType="void" visibility="public" isStatic="true">
+          <Argument type="String" name="args"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="retiros" package="Main" visibility="public" xPosition="166.0" yPosition="1620.0">
+      <Fields>
+        <Field name="RetiroCambiar" type="javax.swing.JButton" visibility="private"/>
+        <Field name="RetiroCcc" type="javax.swing.JButton" visibility="private"/>
+        <Field name="RetiroCliente" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="RetiroCsc" type="javax.swing.JButton" visibility="private"/>
+        <Field name="RetiroImporte" type="javax.swing.JTextField" visibility="private"/>
+        <Field name="RetiroSalir" type="javax.swing.JButton" visibility="private"/>
+        <Field name="botones" type="javax.swing.JPanel" visibility="private"/>
+        <Field name="btn0" type="javax.swing.JButton" visibility="private"/>
+        <Field name="btn1" type="javax.swing.JButton" visibility="private"/>
+        <Field name="btn2" type="javax.swing.JButton" visibility="private"/>
+        <Field name="btn3" type="javax.swing.JButton" visibility="private"/>
+        <Field name="btn4" type="javax.swing.JButton" visibility="private"/>
+        <Field name="btn5" type="javax.swing.JButton" visibility="private"/>
+        <Field name="btn6" type="javax.swing.JButton" visibility="private"/>
+        <Field name="btn7" type="javax.swing.JButton" visibility="private"/>
+        <Field name="btn8" type="javax.swing.JButton" visibility="private"/>
+        <Field name="btn9" type="javax.swing.JButton" visibility="private"/>
+        <Field name="btnBorrar" type="javax.swing.JButton" visibility="private"/>
+        <Field name="btnConfirmar" type="javax.swing.JButton" visibility="private"/>
+        <Field name="btnRetroceder" type="javax.swing.JButton" visibility="private"/>
+        <Field name="jLabel10" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="jLabel2" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="jLabel3" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="jLabel8" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="jLabel9" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="jPanel13" type="javax.swing.JPanel" visibility="private"/>
+        <Field name="lblFecha2" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="lblHora2" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="nulo1" type="javax.swing.JButton" visibility="private"/>
+        <Field name="nulo2" type="javax.swing.JButton" visibility="private"/>
+        <Field name="numeros" type="javax.swing.JPanel" visibility="private"/>
+        <Field name="conexion" type="Connection" visibility="package"/>
+        <Field name="sentencia" type="Statement" visibility="package"/>
+        <Field name="sentencia2" type="Statement" visibility="package"/>
+        <Field name="resultado" type="ResultSet" visibility="package"/>
+        <Field name="resultado2" type="ResultSet" visibility="package"/>
+        <Field name="tarjeta" type="Tarjeta" visibility="package"/>
+        <Field name="cliente" type="Cliente" visibility="package"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public"/>
+      </Constructors>
+      <Methods>
+        <Method name="esNumero" returnType="boolean" visibility="private">
+          <Argument type="String" name="s1"/>
+        </Method>
+        <Method name="initVentana" returnType="void" visibility="private"/>
+        <Method name="initBD" returnType="void" visibility="private"/>
+        <Method name="initComponents" returnType="// &lt;editor-fold defaultstate=&quot;collapsed&quot; desc=&quot;Generated Code&quot;&gt;//GEN-BEGIN:initComponents void" visibility="private"/>
+        <Method name="btn1ActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="btn2ActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="btn3ActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="btn4ActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="btn5ActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="btn6ActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="btn7ActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="btn8ActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="btn9ActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="btn0ActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="btnBorrarActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="btnRetrocederActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="btnConfirmarActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="RetiroCambiarActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="RetiroSalirActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="main" returnType="void" visibility="public" isStatic="true">
+          <Argument type="String" name="args"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="Tarjeta" package="Main" visibility="public" xPosition="1181.0" yPosition="1985.0">
+      <Fields>
+        <Field name="numtarjeta" type="long" visibility="private"/>
+        <Field name="propietario" type="int" visibility="private"/>
+        <Field name="pin" type="int" visibility="private"/>
+        <Field name="saldo" type="double" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="long" name="numtarjeta"/>
+          <Argument type="int" name="propietario"/>
+          <Argument type="int" name="pin"/>
+          <Argument type="double" name="saldo"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="getNumtarjeta" returnType="long" visibility="public"/>
+        <Method name="setNumtarjeta" returnType="void" visibility="public">
+          <Argument type="int" name="numtarjeta"/>
+        </Method>
+        <Method name="getPropietario" returnType="int" visibility="public"/>
+        <Method name="setPropietario" returnType="void" visibility="public">
+          <Argument type="int" name="propietario"/>
+        </Method>
+        <Method name="getPin" returnType="int" visibility="public"/>
+        <Method name="setPin" returnType="void" visibility="public">
+          <Argument type="int" name="pin"/>
+        </Method>
+        <Method name="getSaldo" returnType="double" visibility="public"/>
+        <Method name="setSaldo" returnType="void" visibility="public">
+          <Argument type="double" name="saldo"/>
+        </Method>
+        <Method name="toString" returnType="String" visibility="public"/>
+      </Methods>
+    </Class>
+    <Class name="transferencias" package="Main" visibility="public" xPosition="3736.0" yPosition="34.0">
+      <Fields>
+        <Field name="TransferenciaCantidad" type="javax.swing.JTextField" visibility="private"/>
+        <Field name="TransferenciaConcepto" type="javax.swing.JTextField" visibility="private"/>
+        <Field name="TransferenciaIBAN" type="javax.swing.JTextField" visibility="private"/>
+        <Field name="botones" type="javax.swing.JPanel" visibility="private"/>
+        <Field name="btn0" type="javax.swing.JButton" visibility="private"/>
+        <Field name="btn1" type="javax.swing.JButton" visibility="private"/>
+        <Field name="btn2" type="javax.swing.JButton" visibility="private"/>
+        <Field name="btn3" type="javax.swing.JButton" visibility="private"/>
+        <Field name="btn4" type="javax.swing.JButton" visibility="private"/>
+        <Field name="btn5" type="javax.swing.JButton" visibility="private"/>
+        <Field name="btn6" type="javax.swing.JButton" visibility="private"/>
+        <Field name="btn7" type="javax.swing.JButton" visibility="private"/>
+        <Field name="btn8" type="javax.swing.JButton" visibility="private"/>
+        <Field name="btn9" type="javax.swing.JButton" visibility="private"/>
+        <Field name="btnBorrar" type="javax.swing.JButton" visibility="private"/>
+        <Field name="btnConfirmar" type="javax.swing.JButton" visibility="private"/>
+        <Field name="btnRetroceder" type="javax.swing.JButton" visibility="private"/>
+        <Field name="jLabel13" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="jLabel14" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="jLabel15" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="jLabel16" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="jPanel1" type="javax.swing.JPanel" visibility="private"/>
+        <Field name="lblFecha1" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="lblHora1" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="nulo1" type="javax.swing.JButton" visibility="private"/>
+        <Field name="nulo2" type="javax.swing.JButton" visibility="private"/>
+        <Field name="numeros" type="javax.swing.JPanel" visibility="private"/>
+        <Field name="conexion" type="Connection" visibility="package"/>
+        <Field name="sentencia" type="Statement" visibility="package"/>
+        <Field name="sentencia2" type="Statement" visibility="package"/>
+        <Field name="resultado" type="ResultSet" visibility="package"/>
+        <Field name="resultado2" type="ResultSet" visibility="package"/>
+        <Field name="tarjeta" type="Tarjeta" visibility="package"/>
+        <Field name="cliente" type="Cliente" visibility="package"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public"/>
+      </Constructors>
+      <Methods>
+        <Method name="esNumero" returnType="boolean" visibility="private">
+          <Argument type="String" name="s1"/>
+        </Method>
+        <Method name="initVentana" returnType="void" visibility="private"/>
+        <Method name="initBD" returnType="void" visibility="private"/>
+        <Method name="initComponents" returnType="// &lt;editor-fold defaultstate=&quot;collapsed&quot; desc=&quot;Generated Code&quot;&gt;//GEN-BEGIN:initComponents void" visibility="private"/>
+        <Method name="btn1ActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="btn2ActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="btn3ActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="btn4ActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="btn5ActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="btn6ActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="btn7ActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="btn8ActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="btn9ActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="btn0ActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="btnBorrarActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="btnRetrocederActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="btnConfirmarActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="main" returnType="void" visibility="public" isStatic="true">
+          <Argument type="String" name="args"/>
+        </Method>
+      </Methods>
+    </Class>
+  </ClassDiagramComponents>
+  <ClassDiagramRelations>
+    <HasRelation name="tarjeta" source="Main.transferencias" target="Main.Tarjeta" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="c" source="Main.operaciones" target="Main.Cliente" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="transferencia" source="Main.operaciones" target="Main.transferencias" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="cliente" source="Main.cambioPIN" target="Main.Cliente" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="t" source="Main.operaciones" target="Main.Tarjeta" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="tarjeta" source="Main.retiros" target="Main.Tarjeta" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="cliente" source="Main.ingresos" target="Main.Cliente" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="bienvenido" source="Main.operaciones" target="Main.bienvenidos" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="cambio" source="Main.operaciones" target="Main.cambioPIN" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="tarjeta" source="Main.cambioPIN" target="Main.Tarjeta" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="retiro" source="Main.operaciones" target="Main.retiros" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="tarjeta" source="Main.estados" target="Main.Tarjeta" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="tarjeta" source="Main.operaciones" target="Main.Tarjeta" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="cliente" source="Main.estados" target="Main.Cliente" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="ingreso" source="Main.operaciones" target="Main.ingresos" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="estado" source="Main.operaciones" target="Main.estados" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="cliente" source="Main.operaciones" target="Main.Cliente" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="operaciones" source="Main.bienvenidos" target="Main.operaciones" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="cliente" source="Main.transferencias" target="Main.Cliente" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="tarjeta" source="Main.ingresos" target="Main.Tarjeta" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="cliente" source="Main.retiros" target="Main.Cliente" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+  </ClassDiagramRelations>
+</ClassDiagram>
