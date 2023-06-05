@@ -39,9 +39,9 @@ public class operaciones extends javax.swing.JFrame {
     }
 
     private operaciones() {
-            JOptionPane.showMessageDialog(this, "Error, debes iniciar sesion primero","ERROR",JOptionPane.ERROR_MESSAGE);
-            System.exit(0);
-  
+        JOptionPane.showMessageDialog(this, "Error, debes iniciar sesion primero", "ERROR", JOptionPane.ERROR_MESSAGE);
+        System.exit(0);
+
     }
 
     private boolean esNumero(String s1) {
@@ -185,7 +185,7 @@ public class operaciones extends javax.swing.JFrame {
 
         numeros.setLayout(new java.awt.GridLayout(4, 0));
 
-        btn1.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        btn1.setFont(new java.awt.Font("Cascadia Code PL", 0, 36)); // NOI18N
         btn1.setText("1");
         btn1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -194,7 +194,7 @@ public class operaciones extends javax.swing.JFrame {
         });
         numeros.add(btn1);
 
-        btn2.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        btn2.setFont(new java.awt.Font("Cascadia Code PL", 0, 36)); // NOI18N
         btn2.setText("2");
         btn2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -203,7 +203,7 @@ public class operaciones extends javax.swing.JFrame {
         });
         numeros.add(btn2);
 
-        btn3.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        btn3.setFont(new java.awt.Font("Cascadia Code PL", 0, 36)); // NOI18N
         btn3.setText("3");
         btn3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -212,7 +212,7 @@ public class operaciones extends javax.swing.JFrame {
         });
         numeros.add(btn3);
 
-        btn4.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        btn4.setFont(new java.awt.Font("Cascadia Code PL", 0, 36)); // NOI18N
         btn4.setText("4");
         btn4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -221,7 +221,7 @@ public class operaciones extends javax.swing.JFrame {
         });
         numeros.add(btn4);
 
-        btn5.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        btn5.setFont(new java.awt.Font("Cascadia Code PL", 0, 36)); // NOI18N
         btn5.setText("5");
         btn5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -230,7 +230,7 @@ public class operaciones extends javax.swing.JFrame {
         });
         numeros.add(btn5);
 
-        btn6.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        btn6.setFont(new java.awt.Font("Cascadia Code PL", 0, 36)); // NOI18N
         btn6.setText("6");
         btn6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -239,7 +239,7 @@ public class operaciones extends javax.swing.JFrame {
         });
         numeros.add(btn6);
 
-        btn7.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        btn7.setFont(new java.awt.Font("Cascadia Code PL", 0, 36)); // NOI18N
         btn7.setText("7");
         btn7.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -248,7 +248,7 @@ public class operaciones extends javax.swing.JFrame {
         });
         numeros.add(btn7);
 
-        btn8.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        btn8.setFont(new java.awt.Font("Cascadia Code PL", 0, 36)); // NOI18N
         btn8.setText("8");
         btn8.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -257,7 +257,7 @@ public class operaciones extends javax.swing.JFrame {
         });
         numeros.add(btn8);
 
-        btn9.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        btn9.setFont(new java.awt.Font("Cascadia Code PL", 0, 36)); // NOI18N
         btn9.setText("9");
         btn9.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -269,7 +269,7 @@ public class operaciones extends javax.swing.JFrame {
         nulo1.setEnabled(false);
         numeros.add(nulo1);
 
-        btn0.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        btn0.setFont(new java.awt.Font("Cascadia Code PL", 0, 36)); // NOI18N
         btn0.setText("0");
         btn0.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -284,7 +284,7 @@ public class operaciones extends javax.swing.JFrame {
         botones.setLayout(new java.awt.GridLayout(3, 0));
 
         btnRetroceder.setBackground(new java.awt.Color(255, 255, 51));
-        btnRetroceder.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        btnRetroceder.setFont(new java.awt.Font("Cascadia Code PL", 0, 24)); // NOI18N
         btnRetroceder.setText("RETROCEDER");
         btnRetroceder.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -294,7 +294,7 @@ public class operaciones extends javax.swing.JFrame {
         botones.add(btnRetroceder);
 
         btnBorrar.setBackground(new java.awt.Color(204, 0, 0));
-        btnBorrar.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        btnBorrar.setFont(new java.awt.Font("Cascadia Code PL", 0, 24)); // NOI18N
         btnBorrar.setText("BORRAR");
         btnBorrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -304,7 +304,7 @@ public class operaciones extends javax.swing.JFrame {
         botones.add(btnBorrar);
 
         btnConfirmar.setBackground(new java.awt.Color(51, 204, 0));
-        btnConfirmar.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        btnConfirmar.setFont(new java.awt.Font("Cascadia Code PL", 0, 24)); // NOI18N
         btnConfirmar.setText("CONFIRMAR");
         btnConfirmar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -347,7 +347,7 @@ public class operaciones extends javax.swing.JFrame {
                     .addComponent(lblFecha1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(57, 57, 57)
                 .addComponent(acciones, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(68, 68, 68)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 74, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(numeros, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(botones, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -396,7 +396,7 @@ public class operaciones extends javax.swing.JFrame {
     private void btn0ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn0ActionPerformed
 
     }//GEN-LAST:event_btn0ActionPerformed
-    //Botones del teclado
+
     private void btnBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBorrarActionPerformed
 
     }//GEN-LAST:event_btnBorrarActionPerformed
@@ -414,6 +414,7 @@ public class operaciones extends javax.swing.JFrame {
             bienvenido.setVisible(true);
             this.dispose();
         } else {
+            JOptionPane.showMessageDialog(this, "Vuelva Pronto!!","HASTA LUEGO",JOptionPane.DEFAULT_OPTION);
             bienvenido = new bienvenidos();
             bienvenido.setVisible(true);
             this.dispose();
@@ -425,7 +426,7 @@ public class operaciones extends javax.swing.JFrame {
             estado.setVisible(true);
             this.dispose();
         } else {
-            estado = new estados(t,c);
+            estado = new estados(t, c);
             estado.setVisible(true);
             this.dispose();
         }
@@ -436,7 +437,7 @@ public class operaciones extends javax.swing.JFrame {
             cambio.setVisible(true);
             this.dispose();
         } else {
-            cambio = new cambioPIN(t,c);
+            cambio = new cambioPIN(t, c);
             cambio.setVisible(true);
             this.dispose();
         }
@@ -447,7 +448,7 @@ public class operaciones extends javax.swing.JFrame {
             transferencia.setVisible(true);
             this.dispose();
         } else {
-            transferencia = new transferencias();
+            transferencia = new transferencias(t, c);
             transferencia.setVisible(true);
             this.dispose();
         }
@@ -458,7 +459,7 @@ public class operaciones extends javax.swing.JFrame {
             retiro.setVisible(true);
             this.dispose();
         } else {
-            retiro = new retiros(t,c);
+            retiro = new retiros(t, c);
             retiro.setVisible(true);
             this.dispose();
         }
@@ -469,29 +470,10 @@ public class operaciones extends javax.swing.JFrame {
             ingreso.setVisible(true);
             this.dispose();
         } else {
-            ingreso = new ingresos(t,c);
+            ingreso = new ingresos(t, c);
             ingreso.setVisible(true);
             this.dispose();
         }
-        /*
-        try {
-            sentencia = conexion.createStatement();
-            String sql1 = "SELECT propietario FROM tarjetas WHERE pin=" + txfPin.getText() + ";";
-            resultado = sentencia.executeQuery(sql1);
-            if (resultado.next()) {
-                sentencia2 = conexion.createStatement();
-                String sql2 = "SELECT nombre FROM clientes WHERE id=" + resultado.getString("propietario") + ";";
-                resultado2 = sentencia2.executeQuery(sql2);
-                if (resultado2.next()) {
-                    IngresoCliente.setText(resultado2.getString("nombre"));
-                }
-            }
-            operaciones.setSelectedIndex(2);
-
-        } catch (SQLException ex) {
-            Logger.getLogger(main1.class.getName()).log(Level.SEVERE, null, ex);
-        }
-         */
     }//GEN-LAST:event_btnIngresoActionPerformed
 
     /**

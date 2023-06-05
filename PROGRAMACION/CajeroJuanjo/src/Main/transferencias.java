@@ -4,6 +4,7 @@
  */
 package Main;
 
+import static Main.retiros.esMultiplo;
 import bd.Conexion;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -11,6 +12,8 @@ import java.sql.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.Timer;
 
@@ -20,13 +23,22 @@ import javax.swing.Timer;
  */
 public class transferencias extends javax.swing.JFrame {
 
-    /**
-     * Creates new form main
-     */
-    public transferencias() {
+    private Tarjeta t;
+    private Cliente c;
+    private operaciones operaciones;
+    private bienvenidos bienvenidos;
+
+    public transferencias(Tarjeta tarjeta, Cliente cliente) {
         initComponents();
+        this.t = tarjeta;
+        this.c = cliente;
         initVentana();
         initBD();
+    }
+
+    private transferencias() {
+        JOptionPane.showMessageDialog(this, "Error, debes iniciar sesion primero", "ERROR", JOptionPane.ERROR_MESSAGE);
+        System.exit(0);
     }
 
     private boolean esNumero(String s1) {
@@ -36,6 +48,10 @@ public class transferencias extends javax.swing.JFrame {
             }
         }
         return false;
+    }
+
+    public static boolean esMultiplo(int numero) {
+        return numero % 5 == 0;
     }
 
     private void initVentana() {
@@ -96,14 +112,17 @@ public class transferencias extends javax.swing.JFrame {
         btnConfirmar = new javax.swing.JButton();
         lblFecha1 = new javax.swing.JLabel();
         lblHora1 = new javax.swing.JLabel();
-        jPanel1 = new javax.swing.JPanel();
         jLabel14 = new javax.swing.JLabel();
         TransferenciaIBAN = new javax.swing.JTextField();
         jLabel13 = new javax.swing.JLabel();
         TransferenciaConcepto = new javax.swing.JTextField();
         jLabel16 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
-        TransferenciaCantidad = new javax.swing.JTextField();
+        TransferenciaImporte = new javax.swing.JTextField();
+        jPanel2 = new javax.swing.JPanel();
+        TransferenciaConfirmar = new javax.swing.JButton();
+        TransferenciaCambiar = new javax.swing.JButton();
+        TransferenciaSalir = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(0, 0, 0));
@@ -246,23 +265,19 @@ public class transferencias extends javax.swing.JFrame {
 
         lblHora1.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
 
-        jPanel1.setLayout(new java.awt.GridLayout(2, 0));
-
         jLabel14.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        jLabel14.setText("IBAN del destinatario");
-        jPanel1.add(jLabel14);
+        jLabel14.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel14.setText("IBAN del destinatario:  ");
 
         TransferenciaIBAN.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         TransferenciaIBAN.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-        jPanel1.add(TransferenciaIBAN);
 
         jLabel13.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        jLabel13.setText("Concepto");
-        jPanel1.add(jLabel13);
+        jLabel13.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel13.setText("Concepto:  ");
 
         TransferenciaConcepto.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         TransferenciaConcepto.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-        jPanel1.add(TransferenciaConcepto);
 
         jLabel16.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jLabel16.setText("€");
@@ -273,38 +288,81 @@ public class transferencias extends javax.swing.JFrame {
         jLabel15.setMinimumSize(new java.awt.Dimension(64, 22));
         jLabel15.setPreferredSize(new java.awt.Dimension(64, 22));
 
-        TransferenciaCantidad.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        TransferenciaCantidad.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        TransferenciaImporte.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        TransferenciaImporte.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        TransferenciaImporte.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                TransferenciaImporteFocusLost(evt);
+            }
+        });
+
+        jPanel2.setLayout(new java.awt.GridLayout(3, 0));
+
+        TransferenciaConfirmar.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        TransferenciaConfirmar.setText("Confirmar");
+        TransferenciaConfirmar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TransferenciaConfirmarActionPerformed(evt);
+            }
+        });
+        jPanel2.add(TransferenciaConfirmar);
+
+        TransferenciaCambiar.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        TransferenciaCambiar.setText("Cambiar Operación");
+        TransferenciaCambiar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TransferenciaCambiarActionPerformed(evt);
+            }
+        });
+        jPanel2.add(TransferenciaCambiar);
+
+        TransferenciaSalir.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        TransferenciaSalir.setText("Salir");
+        TransferenciaSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TransferenciaSalirActionPerformed(evt);
+            }
+        });
+        jPanel2.add(TransferenciaSalir);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 408, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 214, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                            .addContainerGap(206, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(TransferenciaCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                            .addContainerGap()
-                            .addComponent(lblFecha1, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(lblHora1, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(116, 116, 116)
-                            .addComponent(numeros, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(8, 8, 8)
-                            .addComponent(botones, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(136, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(lblFecha1, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lblHora1, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(116, 116, 116)
+                        .addComponent(numeros, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(8, 8, 8)
+                        .addComponent(botones, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(219, 219, 219)
+                        .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(TransferenciaImporte, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(TransferenciaConcepto, javax.swing.GroupLayout.DEFAULT_SIZE, 348, Short.MAX_VALUE)
+                            .addComponent(TransferenciaIBAN))))
+                .addGap(18, 18, 18)
+                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 221, Short.MAX_VALUE)
+                .addGap(16, 16, 16))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -313,14 +371,28 @@ public class transferencias extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(lblHora1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblFecha1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(43, 43, 43)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 57, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(TransferenciaCantidad, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel15, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel16, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(20, 20, 20)
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 244, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 53, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(35, 35, 35)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(TransferenciaIBAN, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(TransferenciaConcepto, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel16, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(TransferenciaImporte, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(1, 1, 1)))
+                        .addGap(18, 18, 18)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(numeros, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(botones, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -331,56 +403,143 @@ public class transferencias extends javax.swing.JFrame {
 
     //Teclado
     private void btn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn1ActionPerformed
-        
+
     }//GEN-LAST:event_btn1ActionPerformed
 
     private void btn2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn2ActionPerformed
-        
+
     }//GEN-LAST:event_btn2ActionPerformed
 
     private void btn3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn3ActionPerformed
-        
+
     }//GEN-LAST:event_btn3ActionPerformed
 
     private void btn4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn4ActionPerformed
-        
+
     }//GEN-LAST:event_btn4ActionPerformed
 
     private void btn5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn5ActionPerformed
-        
+
     }//GEN-LAST:event_btn5ActionPerformed
 
     private void btn6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn6ActionPerformed
-        
+
     }//GEN-LAST:event_btn6ActionPerformed
 
     private void btn7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn7ActionPerformed
-        
+
     }//GEN-LAST:event_btn7ActionPerformed
 
     private void btn8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn8ActionPerformed
-        
+
     }//GEN-LAST:event_btn8ActionPerformed
 
     private void btn9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn9ActionPerformed
-        
+
     }//GEN-LAST:event_btn9ActionPerformed
 
     private void btn0ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn0ActionPerformed
-        
+
     }//GEN-LAST:event_btn0ActionPerformed
     //Botones del teclado
     private void btnBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBorrarActionPerformed
-        
+
     }//GEN-LAST:event_btnBorrarActionPerformed
 
     private void btnRetrocederActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRetrocederActionPerformed
-        
+
     }//GEN-LAST:event_btnRetrocederActionPerformed
 
     private void btnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarActionPerformed
-        
+
     }//GEN-LAST:event_btnConfirmarActionPerformed
+
+    private void TransferenciaCambiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TransferenciaCambiarActionPerformed
+        if (operaciones != null) {
+            operaciones.setVisible(true);
+            this.dispose();
+        } else {
+            operaciones = new operaciones(t, c);
+            operaciones.setVisible(true);
+            this.dispose();
+        }
+    }//GEN-LAST:event_TransferenciaCambiarActionPerformed
+
+    private void TransferenciaSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TransferenciaSalirActionPerformed
+        if (bienvenidos != null) {
+            bienvenidos.setVisible(true);
+            this.dispose();
+        } else {
+            JOptionPane.showMessageDialog(this, "Vuelva Pronto!!","HASTA LUEGO",JOptionPane.DEFAULT_OPTION);
+            bienvenidos = new bienvenidos();
+            bienvenidos.setVisible(true);
+            this.dispose();
+        }
+    }//GEN-LAST:event_TransferenciaSalirActionPerformed
+
+    private void TransferenciaImporteFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_TransferenciaImporteFocusLost
+        if ((esNumero(TransferenciaImporte.getText()) == false)) {
+            JOptionPane.showMessageDialog(this, "Error, solo se pueden escribir numeros", "ERROR", JOptionPane.ERROR_MESSAGE);
+            TransferenciaImporte.setText("");
+        }
+    }//GEN-LAST:event_TransferenciaImporteFocusLost
+
+    private void TransferenciaConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TransferenciaConfirmarActionPerformed
+        if ((esNumero(TransferenciaImporte.getText()) == false)) {
+            JOptionPane.showMessageDialog(this, "Error, solo se pueden escribir numeros", "ERROR", JOptionPane.ERROR_MESSAGE);
+            TransferenciaImporte.setText("");
+        } else {
+
+            try {
+                if (esMultiplo(Integer.parseInt(TransferenciaImporte.getText())) == true) {
+                    sentencia = conexion.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
+                    String sql = "SELECT * FROM clientes WHERE IBAN='" + TransferenciaIBAN.getText() + "';";
+                    resultado = sentencia.executeQuery(sql);
+                    if (resultado.next()) {
+                        if (Integer.parseInt(TransferenciaImporte.getText()) > t.getSaldo()) {
+                            JOptionPane.showMessageDialog(this, "El importe introducido es superior al saldo actual", "ERROR", JOptionPane.ERROR_MESSAGE);
+                            TransferenciaImporte.setText("");
+                        }
+                        sentencia2 = conexion.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
+                        String sql2 = "SELECT * FROM tarjetas WHERE propietario=" + resultado.getInt("id") + ";";
+                        resultado2 = sentencia2.executeQuery(sql2);
+                        if (resultado2.next()) {
+                            int transferencia = resultado2.getInt("saldo") + Integer.parseInt(TransferenciaImporte.getText());
+                            resultado2.updateInt("saldo", transferencia);
+                            resultado2.updateRow();
+                            sentencia3 = conexion.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
+                            String sql3 = "SELECT * FROM tarjetas WHERE propietario=" + c.getId() + ";";
+                            resultado3 = sentencia3.executeQuery(sql3);
+                            if (resultado3.next()) {
+                                int restado = resultado3.getInt("saldo") - Integer.parseInt(TransferenciaImporte.getText());
+                                resultado3.updateInt("saldo", restado);
+                                resultado3.updateRow();
+                                t.setSaldo(restado);
+                            }
+                            if (operaciones != null) {
+                                operaciones.setVisible(true);
+                                this.dispose();
+                            } else {
+                                JOptionPane.showMessageDialog(this, "Transferencia realizada con exito", "CONFIRMACIÓN", JOptionPane.DEFAULT_OPTION);
+                                operaciones = new operaciones(t, c);
+                                operaciones.setVisible(true);
+                                this.dispose();
+                            }
+                        }
+                    } else {
+                        JOptionPane.showMessageDialog(this, "No se encontro ningun usuario con ese IBAN", "ERROR", JOptionPane.ERROR_MESSAGE);
+                        TransferenciaIBAN.setText("");
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(this, "Error, solo se puede escribir multiplos de 5", "ERROR", JOptionPane.ERROR_MESSAGE);
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(transferencias.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (NumberFormatException ex) {
+            }
+
+        }
+    }//GEN-LAST:event_TransferenciaConfirmarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -441,9 +600,12 @@ public class transferencias extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField TransferenciaCantidad;
+    private javax.swing.JButton TransferenciaCambiar;
     private javax.swing.JTextField TransferenciaConcepto;
+    private javax.swing.JButton TransferenciaConfirmar;
     private javax.swing.JTextField TransferenciaIBAN;
+    private javax.swing.JTextField TransferenciaImporte;
+    private javax.swing.JButton TransferenciaSalir;
     private javax.swing.JPanel botones;
     private javax.swing.JButton btn0;
     private javax.swing.JButton btn1;
@@ -462,7 +624,7 @@ public class transferencias extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
-    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JLabel lblFecha1;
     private javax.swing.JLabel lblHora1;
     private javax.swing.JButton nulo1;
@@ -472,8 +634,10 @@ public class transferencias extends javax.swing.JFrame {
     Connection conexion;
     Statement sentencia;
     Statement sentencia2;
+    Statement sentencia3;
     ResultSet resultado;
     ResultSet resultado2;
+    ResultSet resultado3;
     Tarjeta tarjeta;
     Cliente cliente;
 }

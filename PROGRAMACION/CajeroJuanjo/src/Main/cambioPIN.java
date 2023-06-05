@@ -432,7 +432,7 @@ public class cambioPIN extends javax.swing.JFrame {
             bienvenidos.setVisible(true);
             this.dispose();
         } else {
-            JOptionPane.showMessageDialog(this, "VUELVA PRONTO!!", "", JOptionPane.DEFAULT_OPTION);
+            JOptionPane.showMessageDialog(this, "Vuelva Pronto!!","HASTA LUEGO",JOptionPane.DEFAULT_OPTION);
             bienvenidos = new bienvenidos();
             bienvenidos.setVisible(true);
             this.dispose();

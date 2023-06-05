@@ -5,12 +5,20 @@
 package Main;
 
 import bd.Conexion;
+import com.itextpdf.text.*;
+import com.itextpdf.text.pdf.*;
+import java.awt.Desktop;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.sql.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.Timer;
 
@@ -67,9 +75,10 @@ public class estados extends javax.swing.JFrame {
         //introducir datos
         EstadoPropietario.setText(c.getNombre());
         EstadoIBAN.setText(c.getIBAN());
-        EstadoSaldo.setText(t.getSaldo() + "");
-        EstadoFecha.setText(hoy.format(formato));
-
+        EstadoSaldo.setText(t.getSaldo() + " €");
+        DateTimeFormatter formato2 = DateTimeFormatter.ofPattern("EEEE, dd/MM/yyyy");
+        EstadoFecha.setText(hoy.format(formato2));
+        EstadoHora.setText(sHora);
     }
 
     private void initBD() {
@@ -116,12 +125,14 @@ public class estados extends javax.swing.JFrame {
         jPanel4 = new javax.swing.JPanel();
         jLabel20 = new javax.swing.JLabel();
         EstadoPropietario = new javax.swing.JLabel();
-        jLabel23 = new javax.swing.JLabel();
-        EstadoSaldo = new javax.swing.JLabel();
         jLabel26 = new javax.swing.JLabel();
         EstadoIBAN = new javax.swing.JLabel();
+        jLabel23 = new javax.swing.JLabel();
+        EstadoSaldo = new javax.swing.JLabel();
         jLabel21 = new javax.swing.JLabel();
         EstadoFecha = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        EstadoHora = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
         EstadoImprimir = new javax.swing.JButton();
         EstadoCambio = new javax.swing.JButton();
@@ -203,7 +214,7 @@ public class estados extends javax.swing.JFrame {
 
         lblHora1.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
 
-        jPanel4.setLayout(new java.awt.GridLayout(4, 0));
+        jPanel4.setLayout(new java.awt.GridLayout(5, 0));
 
         jLabel20.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         jLabel20.setText("Propietario:");
@@ -212,13 +223,6 @@ public class estados extends javax.swing.JFrame {
         EstadoPropietario.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         jPanel4.add(EstadoPropietario);
 
-        jLabel23.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
-        jLabel23.setText("Saldo actual:");
-        jPanel4.add(jLabel23);
-
-        EstadoSaldo.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        jPanel4.add(EstadoSaldo);
-
         jLabel26.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         jLabel26.setText("IBAN:");
         jPanel4.add(jLabel26);
@@ -226,12 +230,26 @@ public class estados extends javax.swing.JFrame {
         EstadoIBAN.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         jPanel4.add(EstadoIBAN);
 
+        jLabel23.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        jLabel23.setText("Saldo actual:");
+        jPanel4.add(jLabel23);
+
+        EstadoSaldo.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        jPanel4.add(EstadoSaldo);
+
         jLabel21.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         jLabel21.setText("Fecha:");
         jPanel4.add(jLabel21);
 
         EstadoFecha.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         jPanel4.add(EstadoFecha);
+
+        jLabel1.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        jLabel1.setText("Hora:");
+        jPanel4.add(jLabel1);
+
+        EstadoHora.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        jPanel4.add(EstadoHora);
 
         jPanel5.setLayout(new java.awt.GridLayout(1, 0, 30, 0));
 
@@ -295,9 +313,9 @@ public class estados extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(lblHora1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblFecha1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(37, 37, 37)
-                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(30, 30, 30)
                 .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, 54, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -324,7 +342,7 @@ public class estados extends javax.swing.JFrame {
             bienvenidos.setVisible(true);
             this.dispose();
         } else {
-            JOptionPane.showMessageDialog(this, "VUELVA PRONTO!!", "", JOptionPane.DEFAULT_OPTION);
+            JOptionPane.showMessageDialog(this, "Vuelva Pronto!!","HASTA LUEGO",JOptionPane.DEFAULT_OPTION);
             bienvenidos = new bienvenidos();
             bienvenidos.setVisible(true);
             this.dispose();
@@ -332,7 +350,43 @@ public class estados extends javax.swing.JFrame {
     }//GEN-LAST:event_EstadoSalirActionPerformed
 
     private void EstadoImprimirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EstadoImprimirActionPerformed
-
+        try {
+            Paragraph texto,propietario, IBAN, saldo, fecha,pie,hora;
+            Document documento = new Document();
+            documento.setPageSize(PageSize.A6.rotate());
+            PdfWriter writer = PdfWriter.getInstance(documento, new java.io.FileOutputStream("estado.pdf"));
+            documento.open();
+            Font fuente1 = new Font(FontFactory.getFont("arial", 13));
+            Font fuente2 = new Font(FontFactory.getFont("arial", 18));
+            Font fuente3 = new Font(FontFactory.getFont("arial", 9));
+            fuente1.setStyle("bold");
+            fuente2.setColor(BaseColor.BLUE);
+            fuente3.setStyle("italic");
+            texto=new Paragraph("Comprobante del Estado de la Cuenta",fuente2);
+            documento.add(texto);
+            propietario = new Paragraph("\nPropietario:     " + EstadoPropietario.getText(), fuente1);
+            documento.add(propietario);
+            IBAN = new Paragraph("IBAN:                " + EstadoIBAN.getText(), fuente1);
+            documento.add(IBAN);
+            saldo = new Paragraph("Saldo:               " + EstadoSaldo.getText(), fuente1);
+            documento.add(saldo);
+            fecha = new Paragraph("Fecha:              " + EstadoFecha.getText(), fuente1);
+            documento.add(fecha);
+            hora = new Paragraph("Hora:                " + EstadoHora.getText(), fuente1);
+            documento.add(hora);
+            pie = new Paragraph("\n\n\nGracias por su visita!!!",fuente3);
+            documento.add(pie);
+            
+            File file = new File("estado.pdf");
+            Desktop.getDesktop().open(file);
+            documento.close();
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(estados.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (DocumentException ex) {
+            Logger.getLogger(estados.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(estados.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_EstadoImprimirActionPerformed
 
     /**
@@ -396,6 +450,7 @@ public class estados extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton EstadoCambio;
     private javax.swing.JLabel EstadoFecha;
+    private javax.swing.JLabel EstadoHora;
     private javax.swing.JLabel EstadoIBAN;
     private javax.swing.JButton EstadoImprimir;
     private javax.swing.JLabel EstadoPropietario;
@@ -415,6 +470,7 @@ public class estados extends javax.swing.JFrame {
     private javax.swing.JButton btnBorrar;
     private javax.swing.JButton btnConfirmar;
     private javax.swing.JButton btnRetroceder;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel23;

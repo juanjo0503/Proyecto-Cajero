@@ -28,7 +28,7 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" attributes="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="0" attributes="0">
+                  <Group type="102" attributes="0">
                       <EmptySpace min="-2" pref="114" max="-2" attributes="0"/>
                       <Component id="numeros" min="-2" pref="280" max="-2" attributes="0"/>
                       <EmptySpace min="8" pref="8" max="-2" attributes="0"/>
@@ -39,6 +39,10 @@
                       <Component id="lblFecha" min="-2" pref="114" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="lblHora" min="-2" pref="85" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="267" max="-2" attributes="0"/>
+                      <Component id="jLabel2" min="-2" pref="258" max="-2" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace pref="138" max="32767" attributes="0"/>
@@ -56,11 +60,13 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="1" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="1" attributes="0">
-                  <Component id="lblHora" alignment="1" min="-2" pref="25" max="-2" attributes="0"/>
-                  <Component id="lblFecha" alignment="1" min="-2" pref="25" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                  <Component id="lblHora" alignment="1" pref="25" max="32767" attributes="0"/>
+                  <Component id="lblFecha" alignment="1" pref="25" max="32767" attributes="0"/>
               </Group>
-              <EmptySpace pref="317" max="32767" attributes="0"/>
+              <EmptySpace pref="274" max="32767" attributes="0"/>
+              <Component id="jLabel2" min="-2" pref="25" max="-2" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="numeros" alignment="0" min="-2" pref="320" max="-2" attributes="0"/>
                   <Component id="botones" alignment="0" min="-2" pref="320" max="-2" attributes="0"/>
@@ -312,5 +318,14 @@
         </Component>
       </SubComponents>
     </Container>
+    <Component class="javax.swing.JLabel" name="jLabel2">
+      <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Arial" size="18" style="2"/>
+        </Property>
+        <Property name="horizontalAlignment" type="int" value="0"/>
+        <Property name="text" type="java.lang.String" value="BIENVENIDO AL BANCO"/>
+      </Properties>
+    </Component>
   </SubComponents>
 </Form>
