@@ -19,12 +19,18 @@ import javax.swing.Timer;
  * @author alumnoT
  */
 public class cambioPIN extends javax.swing.JFrame {
+    private operaciones operaciones;
+    private bienvenidos bienvenidos;
+    private Tarjeta t;
+    private Cliente c;
 
     /**
      * Creates new form main
      */
-    public cambioPIN() {
+    public cambioPIN(Tarjeta tarjeta, Cliente cliente) {
         initComponents();
+        this.t = tarjeta;
+        this.c = cliente;
         initVentana();
         initBD();
     }
@@ -46,7 +52,7 @@ public class cambioPIN extends javax.swing.JFrame {
         LocalTime hora = LocalTime.now();
         DateTimeFormatter formato1 = DateTimeFormatter.ofPattern("HH:mm:ss");
         String sHora = hora.format(formato1);
-
+        lblHora1.setText(sHora);
         Timer timer = new Timer(1000, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -57,6 +63,11 @@ public class cambioPIN extends javax.swing.JFrame {
             }
         });
         timer.start();
+    }
+
+    private cambioPIN() {
+        JOptionPane.showMessageDialog(this, "Error, debes iniciar sesion primero", "ERROR", JOptionPane.ERROR_MESSAGE);
+        System.exit(0);
     }
 
     private void initBD() {
@@ -111,12 +122,13 @@ public class cambioPIN extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(0, 0, 0));
         setForeground(new java.awt.Color(102, 102, 102));
+        setLocation(new java.awt.Point(550, 140));
         setMinimumSize(new java.awt.Dimension(800, 720));
         setResizable(false);
 
         numeros.setLayout(new java.awt.GridLayout(4, 0));
 
-        btn1.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        btn1.setFont(new java.awt.Font("Cascadia Code PL", 0, 36)); // NOI18N
         btn1.setText("1");
         btn1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -125,7 +137,7 @@ public class cambioPIN extends javax.swing.JFrame {
         });
         numeros.add(btn1);
 
-        btn2.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        btn2.setFont(new java.awt.Font("Cascadia Code PL", 0, 36)); // NOI18N
         btn2.setText("2");
         btn2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -134,7 +146,7 @@ public class cambioPIN extends javax.swing.JFrame {
         });
         numeros.add(btn2);
 
-        btn3.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        btn3.setFont(new java.awt.Font("Cascadia Code PL", 0, 36)); // NOI18N
         btn3.setText("3");
         btn3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -143,7 +155,7 @@ public class cambioPIN extends javax.swing.JFrame {
         });
         numeros.add(btn3);
 
-        btn4.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        btn4.setFont(new java.awt.Font("Cascadia Code PL", 0, 36)); // NOI18N
         btn4.setText("4");
         btn4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -152,7 +164,7 @@ public class cambioPIN extends javax.swing.JFrame {
         });
         numeros.add(btn4);
 
-        btn5.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        btn5.setFont(new java.awt.Font("Cascadia Code PL", 0, 36)); // NOI18N
         btn5.setText("5");
         btn5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -161,7 +173,7 @@ public class cambioPIN extends javax.swing.JFrame {
         });
         numeros.add(btn5);
 
-        btn6.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        btn6.setFont(new java.awt.Font("Cascadia Code PL", 0, 36)); // NOI18N
         btn6.setText("6");
         btn6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -170,7 +182,7 @@ public class cambioPIN extends javax.swing.JFrame {
         });
         numeros.add(btn6);
 
-        btn7.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        btn7.setFont(new java.awt.Font("Cascadia Code PL", 0, 36)); // NOI18N
         btn7.setText("7");
         btn7.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -179,7 +191,7 @@ public class cambioPIN extends javax.swing.JFrame {
         });
         numeros.add(btn7);
 
-        btn8.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        btn8.setFont(new java.awt.Font("Cascadia Code PL", 0, 36)); // NOI18N
         btn8.setText("8");
         btn8.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -188,7 +200,7 @@ public class cambioPIN extends javax.swing.JFrame {
         });
         numeros.add(btn8);
 
-        btn9.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        btn9.setFont(new java.awt.Font("Cascadia Code PL", 0, 36)); // NOI18N
         btn9.setText("9");
         btn9.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -200,7 +212,7 @@ public class cambioPIN extends javax.swing.JFrame {
         nulo1.setEnabled(false);
         numeros.add(nulo1);
 
-        btn0.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        btn0.setFont(new java.awt.Font("Cascadia Code PL", 0, 36)); // NOI18N
         btn0.setText("0");
         btn0.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -215,7 +227,7 @@ public class cambioPIN extends javax.swing.JFrame {
         botones.setLayout(new java.awt.GridLayout(3, 0));
 
         btnRetroceder.setBackground(new java.awt.Color(255, 255, 51));
-        btnRetroceder.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        btnRetroceder.setFont(new java.awt.Font("Cascadia Code PL", 0, 24)); // NOI18N
         btnRetroceder.setText("RETROCEDER");
         btnRetroceder.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -225,7 +237,7 @@ public class cambioPIN extends javax.swing.JFrame {
         botones.add(btnRetroceder);
 
         btnBorrar.setBackground(new java.awt.Color(204, 0, 0));
-        btnBorrar.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        btnBorrar.setFont(new java.awt.Font("Cascadia Code PL", 0, 24)); // NOI18N
         btnBorrar.setText("BORRAR");
         btnBorrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -235,7 +247,7 @@ public class cambioPIN extends javax.swing.JFrame {
         botones.add(btnBorrar);
 
         btnConfirmar.setBackground(new java.awt.Color(51, 204, 0));
-        btnConfirmar.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        btnConfirmar.setFont(new java.awt.Font("Cascadia Code PL", 0, 24)); // NOI18N
         btnConfirmar.setText("CONFIRMAR");
         btnConfirmar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -353,70 +365,87 @@ public class cambioPIN extends javax.swing.JFrame {
 
     //Teclado
     private void btn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn1ActionPerformed
-        
+
     }//GEN-LAST:event_btn1ActionPerformed
 
     private void btn2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn2ActionPerformed
-        
+
     }//GEN-LAST:event_btn2ActionPerformed
 
     private void btn3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn3ActionPerformed
-        
+
     }//GEN-LAST:event_btn3ActionPerformed
 
     private void btn4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn4ActionPerformed
-        
+
     }//GEN-LAST:event_btn4ActionPerformed
 
     private void btn5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn5ActionPerformed
-        
+
     }//GEN-LAST:event_btn5ActionPerformed
 
     private void btn6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn6ActionPerformed
-        
+
     }//GEN-LAST:event_btn6ActionPerformed
 
     private void btn7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn7ActionPerformed
-        
+
     }//GEN-LAST:event_btn7ActionPerformed
 
     private void btn8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn8ActionPerformed
-        
+
     }//GEN-LAST:event_btn8ActionPerformed
 
     private void btn9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn9ActionPerformed
-        
+
     }//GEN-LAST:event_btn9ActionPerformed
 
     private void btn0ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn0ActionPerformed
-        
+
     }//GEN-LAST:event_btn0ActionPerformed
     //Botones del teclado
     private void btnBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBorrarActionPerformed
-        
+
     }//GEN-LAST:event_btnBorrarActionPerformed
 
     private void btnRetrocederActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRetrocederActionPerformed
-        
+
     }//GEN-LAST:event_btnRetrocederActionPerformed
 
     private void btnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarActionPerformed
-        
+
     }//GEN-LAST:event_btnConfirmarActionPerformed
 
     private void CambioRealizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CambioRealizarActionPerformed
-        
+        if (operaciones != null) {
+            operaciones.setVisible(true);
+            this.dispose();
+        } else {
+            operaciones = new operaciones(t, c);
+            operaciones.setVisible(true);
+            this.dispose();
+        }
     }//GEN-LAST:event_CambioRealizarActionPerformed
 
     private void CambioSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CambioSalirActionPerformed
-        
+        if (bienvenidos != null) {
+            bienvenidos.setVisible(true);
+            this.dispose();
+        } else {
+            JOptionPane.showMessageDialog(this, "VUELVA PRONTO!!", "", JOptionPane.DEFAULT_OPTION);
+            bienvenidos = new bienvenidos();
+            bienvenidos.setVisible(true);
+            this.dispose();
+        }
     }//GEN-LAST:event_CambioSalirActionPerformed
 
     private void CambioConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CambioConfirmarActionPerformed
-        
         try {
+            String sPIN = String.valueOf(t.getPin());
+            if (CambioPA.getText().equals(sPIN)) {
                 if (CambioNP.getText().equals(CambioCP.getText())) {
                     int pinnuevo = Integer.parseInt(CambioNP.getText());
+                    t.setPin(pinnuevo);
                     sentencia = conexion.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
                     String sql = "SELECT * FROM tarjetas WHERE pin=" + CambioPA.getText() + ";";
                     resultado = sentencia.executeQuery(sql);
@@ -424,9 +453,21 @@ public class cambioPIN extends javax.swing.JFrame {
                         resultado.updateInt("pin", pinnuevo);
                         resultado.updateRow();
                     }
+                    if (operaciones != null) {
+                        operaciones.setVisible(true);
+                        this.dispose();
+                    } else {
+                        JOptionPane.showMessageDialog(this, "Se ha cambiado el PIN de forma exitosa");
+                        operaciones = new operaciones(t, c);
+                        operaciones.setVisible(true);
+                        this.dispose();
+                    }
                 } else {
                     JOptionPane.showMessageDialog(this, "El PIN nuevo no coincide", "ERROR", JOptionPane.ERROR_MESSAGE);
                 }
+            } else {
+                JOptionPane.showMessageDialog(this, "El PIN actual no coincide con el del inicio de sesión", "ERROR", JOptionPane.ERROR_MESSAGE);
+            }
         } catch (SQLException ex) {
         } catch (NumberFormatException ex) {
         }

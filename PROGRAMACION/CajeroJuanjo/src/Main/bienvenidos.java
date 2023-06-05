@@ -103,10 +103,11 @@ public class bienvenidos extends javax.swing.JFrame {
         txfPin = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setLocation(new java.awt.Point(550, 140));
 
         numeros.setLayout(new java.awt.GridLayout(4, 0));
 
-        btn1.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        btn1.setFont(new java.awt.Font("Cascadia Code PL", 0, 36)); // NOI18N
         btn1.setText("1");
         btn1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -115,7 +116,7 @@ public class bienvenidos extends javax.swing.JFrame {
         });
         numeros.add(btn1);
 
-        btn2.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        btn2.setFont(new java.awt.Font("Cascadia Code PL", 0, 36)); // NOI18N
         btn2.setText("2");
         btn2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -124,7 +125,7 @@ public class bienvenidos extends javax.swing.JFrame {
         });
         numeros.add(btn2);
 
-        btn3.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        btn3.setFont(new java.awt.Font("Cascadia Code PL", 0, 36)); // NOI18N
         btn3.setText("3");
         btn3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -133,7 +134,7 @@ public class bienvenidos extends javax.swing.JFrame {
         });
         numeros.add(btn3);
 
-        btn4.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        btn4.setFont(new java.awt.Font("Cascadia Code PL", 0, 36)); // NOI18N
         btn4.setText("4");
         btn4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -142,7 +143,7 @@ public class bienvenidos extends javax.swing.JFrame {
         });
         numeros.add(btn4);
 
-        btn5.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        btn5.setFont(new java.awt.Font("Cascadia Code PL", 0, 36)); // NOI18N
         btn5.setText("5");
         btn5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -151,7 +152,7 @@ public class bienvenidos extends javax.swing.JFrame {
         });
         numeros.add(btn5);
 
-        btn6.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        btn6.setFont(new java.awt.Font("Cascadia Code PL", 0, 36)); // NOI18N
         btn6.setText("6");
         btn6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -160,7 +161,7 @@ public class bienvenidos extends javax.swing.JFrame {
         });
         numeros.add(btn6);
 
-        btn7.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        btn7.setFont(new java.awt.Font("Cascadia Code PL", 0, 36)); // NOI18N
         btn7.setText("7");
         btn7.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -169,7 +170,7 @@ public class bienvenidos extends javax.swing.JFrame {
         });
         numeros.add(btn7);
 
-        btn8.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        btn8.setFont(new java.awt.Font("Cascadia Code PL", 0, 36)); // NOI18N
         btn8.setText("8");
         btn8.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -178,7 +179,7 @@ public class bienvenidos extends javax.swing.JFrame {
         });
         numeros.add(btn8);
 
-        btn9.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        btn9.setFont(new java.awt.Font("Cascadia Code PL", 0, 36)); // NOI18N
         btn9.setText("9");
         btn9.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -190,7 +191,7 @@ public class bienvenidos extends javax.swing.JFrame {
         nulo1.setEnabled(false);
         numeros.add(nulo1);
 
-        btn0.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        btn0.setFont(new java.awt.Font("Cascadia Code PL", 0, 36)); // NOI18N
         btn0.setText("0");
         btn0.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -205,7 +206,7 @@ public class bienvenidos extends javax.swing.JFrame {
         botones.setLayout(new java.awt.GridLayout(3, 0));
 
         btnRetroceder.setBackground(new java.awt.Color(255, 255, 51));
-        btnRetroceder.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        btnRetroceder.setFont(new java.awt.Font("Cascadia Code PL", 0, 24)); // NOI18N
         btnRetroceder.setText("RETROCEDER");
         btnRetroceder.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -215,7 +216,7 @@ public class bienvenidos extends javax.swing.JFrame {
         botones.add(btnRetroceder);
 
         btnBorrar.setBackground(new java.awt.Color(204, 0, 0));
-        btnBorrar.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        btnBorrar.setFont(new java.awt.Font("Cascadia Code PL", 0, 24)); // NOI18N
         btnBorrar.setText("BORRAR");
         btnBorrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -225,7 +226,7 @@ public class bienvenidos extends javax.swing.JFrame {
         botones.add(btnBorrar);
 
         btnConfirmar.setBackground(new java.awt.Color(51, 204, 0));
-        btnConfirmar.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        btnConfirmar.setFont(new java.awt.Font("Cascadia Code PL", 0, 24)); // NOI18N
         btnConfirmar.setText("CONFIRMAR");
         btnConfirmar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -370,12 +371,12 @@ public class bienvenidos extends javax.swing.JFrame {
                 resultado = sentencia.executeQuery(sql);
                 if (resultado.next()) {
                     int numtarjeta, propietario, pin;
-                    double saldo;
+                    int saldo;
                     //DATOS DE LA TARJETA
                     numtarjeta = resultado.getInt("numero");
                     propietario = resultado.getInt("propietario");
                     pin = resultado.getInt("pin");
-                    saldo = resultado.getDouble("saldo");
+                    saldo = resultado.getInt("saldo");
                     t = new Tarjeta(numtarjeta, propietario, pin, saldo);
                     //DATOS DE LA CUENTA
                     sentencia1 = conexion.createStatement();

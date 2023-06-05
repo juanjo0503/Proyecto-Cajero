@@ -39,7 +39,9 @@ public class operaciones extends javax.swing.JFrame {
     }
 
     private operaciones() {
-        throw new UnsupportedOperationException("Debes iniciar sesion primero");
+            JOptionPane.showMessageDialog(this, "Error, debes iniciar sesion primero","ERROR",JOptionPane.ERROR_MESSAGE);
+            System.exit(0);
+  
     }
 
     private boolean esNumero(String s1) {
@@ -121,6 +123,7 @@ public class operaciones extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(0, 0, 0));
         setForeground(new java.awt.Color(102, 102, 102));
+        setLocation(new java.awt.Point(550, 140));
         setMinimumSize(new java.awt.Dimension(800, 720));
         setResizable(false);
 
@@ -422,7 +425,7 @@ public class operaciones extends javax.swing.JFrame {
             estado.setVisible(true);
             this.dispose();
         } else {
-            estado = new estados();
+            estado = new estados(t,c);
             estado.setVisible(true);
             this.dispose();
         }
@@ -433,7 +436,7 @@ public class operaciones extends javax.swing.JFrame {
             cambio.setVisible(true);
             this.dispose();
         } else {
-            cambio = new cambioPIN();
+            cambio = new cambioPIN(t,c);
             cambio.setVisible(true);
             this.dispose();
         }
@@ -455,28 +458,10 @@ public class operaciones extends javax.swing.JFrame {
             retiro.setVisible(true);
             this.dispose();
         } else {
-            retiro = new retiros();
+            retiro = new retiros(t,c);
             retiro.setVisible(true);
             this.dispose();
         }
-        /*
-        try {
-            sentencia = conexion.createStatement();
-            String sql1 = "SELECT propietario FROM tarjetas WHERE pin=" + txfPin.getText() + ";";
-            resultado = sentencia.executeQuery(sql1);
-            if (resultado.next()) {
-                sentencia2 = conexion.createStatement();
-                String sql2 = "SELECT nombre FROM clientes WHERE id=" + resultado.getString("propietario") + ";";
-                resultado2 = sentencia2.executeQuery(sql2);
-                if (resultado2.next()) {
-                    RetiroCliente.setText(resultado2.getString("nombre"));
-                }
-            }
-            operaciones.setSelectedIndex(3);
-
-        } catch (SQLException ex) {
-        }
-         */
     }//GEN-LAST:event_btnRetiroActionPerformed
 
     private void btnIngresoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIngresoActionPerformed
@@ -484,7 +469,7 @@ public class operaciones extends javax.swing.JFrame {
             ingreso.setVisible(true);
             this.dispose();
         } else {
-            ingreso = new ingresos();
+            ingreso = new ingresos(t,c);
             ingreso.setVisible(true);
             this.dispose();
         }

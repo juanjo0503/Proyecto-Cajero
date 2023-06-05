@@ -108,6 +108,7 @@ public class transferencias extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(0, 0, 0));
         setForeground(new java.awt.Color(102, 102, 102));
+        setLocation(new java.awt.Point(550, 140));
         setMinimumSize(new java.awt.Dimension(800, 720));
         setResizable(false);
 

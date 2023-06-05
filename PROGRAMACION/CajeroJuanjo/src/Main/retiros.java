@@ -11,6 +11,8 @@ import java.sql.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.Timer;
 
@@ -20,13 +22,26 @@ import javax.swing.Timer;
  */
 public class retiros extends javax.swing.JFrame {
 
-    /**
-     * Creates new form main
-     */
-    public retiros() {
+    private Tarjeta t;
+    private Cliente c;
+    private bienvenidos bienvenidos;
+    private operaciones operaciones;
+
+    public retiros(Tarjeta tarjeta, Cliente cliente) {
         initComponents();
+        this.c = cliente;
+        this.t = tarjeta;
         initVentana();
         initBD();
+    }
+
+    private retiros() {
+        JOptionPane.showMessageDialog(this, "Error, debes iniciar sesion primero", "ERROR", JOptionPane.ERROR_MESSAGE);
+        System.exit(0);
+    }
+
+    public static boolean esMultiplo(int numero) {
+        return numero % 5 == 0;
     }
 
     private boolean esNumero(String s1) {
@@ -46,7 +61,8 @@ public class retiros extends javax.swing.JFrame {
         LocalTime hora = LocalTime.now();
         DateTimeFormatter formato1 = DateTimeFormatter.ofPattern("HH:mm:ss");
         String sHora = hora.format(formato1);
-
+        lblHora2.setText(sHora);
+        RetiroCliente.setText(c.getNombre());
         Timer timer = new Timer(1000, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -104,20 +120,20 @@ public class retiros extends javax.swing.JFrame {
         jLabel10 = new javax.swing.JLabel();
         RetiroCliente = new javax.swing.JLabel();
         jPanel13 = new javax.swing.JPanel();
-        RetiroCcc = new javax.swing.JButton();
-        RetiroCsc = new javax.swing.JButton();
+        RetiroConfirmar = new javax.swing.JButton();
         RetiroCambiar = new javax.swing.JButton();
         RetiroSalir = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(0, 0, 0));
         setForeground(new java.awt.Color(102, 102, 102));
+        setLocation(new java.awt.Point(550, 140));
         setMinimumSize(new java.awt.Dimension(800, 720));
         setResizable(false);
 
         numeros.setLayout(new java.awt.GridLayout(4, 0));
 
-        btn1.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        btn1.setFont(new java.awt.Font("Cascadia Code PL", 0, 36)); // NOI18N
         btn1.setText("1");
         btn1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -126,7 +142,7 @@ public class retiros extends javax.swing.JFrame {
         });
         numeros.add(btn1);
 
-        btn2.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        btn2.setFont(new java.awt.Font("Cascadia Code PL", 0, 36)); // NOI18N
         btn2.setText("2");
         btn2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -135,7 +151,7 @@ public class retiros extends javax.swing.JFrame {
         });
         numeros.add(btn2);
 
-        btn3.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        btn3.setFont(new java.awt.Font("Cascadia Code PL", 0, 36)); // NOI18N
         btn3.setText("3");
         btn3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -144,7 +160,7 @@ public class retiros extends javax.swing.JFrame {
         });
         numeros.add(btn3);
 
-        btn4.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        btn4.setFont(new java.awt.Font("Cascadia Code PL", 0, 36)); // NOI18N
         btn4.setText("4");
         btn4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -153,7 +169,7 @@ public class retiros extends javax.swing.JFrame {
         });
         numeros.add(btn4);
 
-        btn5.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        btn5.setFont(new java.awt.Font("Cascadia Code PL", 0, 36)); // NOI18N
         btn5.setText("5");
         btn5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -162,7 +178,7 @@ public class retiros extends javax.swing.JFrame {
         });
         numeros.add(btn5);
 
-        btn6.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        btn6.setFont(new java.awt.Font("Cascadia Code PL", 0, 36)); // NOI18N
         btn6.setText("6");
         btn6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -171,7 +187,7 @@ public class retiros extends javax.swing.JFrame {
         });
         numeros.add(btn6);
 
-        btn7.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        btn7.setFont(new java.awt.Font("Cascadia Code PL", 0, 36)); // NOI18N
         btn7.setText("7");
         btn7.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -180,7 +196,7 @@ public class retiros extends javax.swing.JFrame {
         });
         numeros.add(btn7);
 
-        btn8.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        btn8.setFont(new java.awt.Font("Cascadia Code PL", 0, 36)); // NOI18N
         btn8.setText("8");
         btn8.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -189,7 +205,7 @@ public class retiros extends javax.swing.JFrame {
         });
         numeros.add(btn8);
 
-        btn9.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        btn9.setFont(new java.awt.Font("Cascadia Code PL", 0, 36)); // NOI18N
         btn9.setText("9");
         btn9.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -201,7 +217,7 @@ public class retiros extends javax.swing.JFrame {
         nulo1.setEnabled(false);
         numeros.add(nulo1);
 
-        btn0.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        btn0.setFont(new java.awt.Font("Cascadia Code PL", 0, 36)); // NOI18N
         btn0.setText("0");
         btn0.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -216,7 +232,7 @@ public class retiros extends javax.swing.JFrame {
         botones.setLayout(new java.awt.GridLayout(3, 0));
 
         btnRetroceder.setBackground(new java.awt.Color(255, 255, 51));
-        btnRetroceder.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        btnRetroceder.setFont(new java.awt.Font("Cascadia Code PL", 0, 24)); // NOI18N
         btnRetroceder.setText("RETROCEDER");
         btnRetroceder.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -226,7 +242,7 @@ public class retiros extends javax.swing.JFrame {
         botones.add(btnRetroceder);
 
         btnBorrar.setBackground(new java.awt.Color(204, 0, 0));
-        btnBorrar.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        btnBorrar.setFont(new java.awt.Font("Cascadia Code PL", 0, 24)); // NOI18N
         btnBorrar.setText("BORRAR");
         btnBorrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -236,7 +252,7 @@ public class retiros extends javax.swing.JFrame {
         botones.add(btnBorrar);
 
         btnConfirmar.setBackground(new java.awt.Color(51, 204, 0));
-        btnConfirmar.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        btnConfirmar.setFont(new java.awt.Font("Cascadia Code PL", 0, 24)); // NOI18N
         btnConfirmar.setText("CONFIRMAR");
         btnConfirmar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -257,6 +273,11 @@ public class retiros extends javax.swing.JFrame {
 
         RetiroImporte.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         RetiroImporte.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        RetiroImporte.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                RetiroImporteFocusLost(evt);
+            }
+        });
 
         jLabel8.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
         jLabel8.setText("€");
@@ -272,15 +293,16 @@ public class retiros extends javax.swing.JFrame {
         RetiroCliente.setFont(new java.awt.Font("Arial", 0, 13)); // NOI18N
         RetiroCliente.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
 
-        jPanel13.setLayout(new java.awt.GridLayout(4, 0, 0, 20));
+        jPanel13.setLayout(new java.awt.GridLayout(3, 0, 0, 20));
 
-        RetiroCcc.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        RetiroCcc.setText("Confirmar con comprobante");
-        jPanel13.add(RetiroCcc);
-
-        RetiroCsc.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        RetiroCsc.setText("Confirmar sin comprobante");
-        jPanel13.add(RetiroCsc);
+        RetiroConfirmar.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        RetiroConfirmar.setText("Confirmar");
+        RetiroConfirmar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                RetiroConfirmarActionPerformed(evt);
+            }
+        });
+        jPanel13.add(RetiroConfirmar);
 
         RetiroCambiar.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         RetiroCambiar.setText("Cambiar de Operación");
@@ -312,8 +334,7 @@ public class retiros extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(RetiroCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addComponent(RetiroCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(76, 76, 76)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -379,64 +400,155 @@ public class retiros extends javax.swing.JFrame {
 
     //Teclado
     private void btn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn1ActionPerformed
-        
+        RetiroImporte.setText(RetiroImporte.getText() + "1");
     }//GEN-LAST:event_btn1ActionPerformed
 
     private void btn2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn2ActionPerformed
-        
+        RetiroImporte.setText(RetiroImporte.getText() + "2");
     }//GEN-LAST:event_btn2ActionPerformed
 
     private void btn3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn3ActionPerformed
-        
+        RetiroImporte.setText(RetiroImporte.getText() + "3");
     }//GEN-LAST:event_btn3ActionPerformed
 
     private void btn4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn4ActionPerformed
-        
+        RetiroImporte.setText(RetiroImporte.getText() + "4");
     }//GEN-LAST:event_btn4ActionPerformed
 
     private void btn5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn5ActionPerformed
-        
+        RetiroImporte.setText(RetiroImporte.getText() + "5");
     }//GEN-LAST:event_btn5ActionPerformed
 
     private void btn6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn6ActionPerformed
-        
+        RetiroImporte.setText(RetiroImporte.getText() + "6");
     }//GEN-LAST:event_btn6ActionPerformed
 
     private void btn7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn7ActionPerformed
-        
+        RetiroImporte.setText(RetiroImporte.getText() + "7");
     }//GEN-LAST:event_btn7ActionPerformed
 
     private void btn8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn8ActionPerformed
-        
+        RetiroImporte.setText(RetiroImporte.getText() + "8");
     }//GEN-LAST:event_btn8ActionPerformed
 
     private void btn9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn9ActionPerformed
-        
+        RetiroImporte.setText(RetiroImporte.getText() + "9");
     }//GEN-LAST:event_btn9ActionPerformed
 
     private void btn0ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn0ActionPerformed
-        
+        RetiroImporte.setText(RetiroImporte.getText() + "10");
     }//GEN-LAST:event_btn0ActionPerformed
     //Botones del teclado
     private void btnBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBorrarActionPerformed
-        
+        RetiroImporte.setText("");
     }//GEN-LAST:event_btnBorrarActionPerformed
 
     private void btnRetrocederActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRetrocederActionPerformed
-        
+        try {
+            String pincogido = RetiroImporte.getText();
+            String modificado = pincogido.substring(0, pincogido.length() - 1);
+            RetiroImporte.setText(modificado);
+        } catch (StringIndexOutOfBoundsException ex) {
+        }
     }//GEN-LAST:event_btnRetrocederActionPerformed
 
     private void btnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarActionPerformed
-        
+        if ((esNumero(RetiroImporte.getText()) == false)) {
+            JOptionPane.showMessageDialog(this, "Error, solo se pueden escribir numeros", "ERROR", JOptionPane.ERROR_MESSAGE);
+            RetiroImporte.setText("");
+        } else {
+            if (esMultiplo(Integer.parseInt(RetiroImporte.getText())) == true) {
+                try {
+                    sentencia = conexion.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
+                    String sql = "SELECT * FROM tarjetas WHERE propietario=" + t.getPropietario() + ";";
+                    resultado = sentencia.executeQuery(sql);
+                    if (resultado.next()) {
+                        int retiro = t.getSaldo() - Integer.parseInt(RetiroImporte.getText());
+                        resultado.updateInt("saldo", retiro);
+                        resultado.updateRow();
+                        System.out.println("saldo antiguo= " + t.getSaldo() + " retiro=" + retiro);
+                    }
+                    if (operaciones != null) {
+                        operaciones.setVisible(true);
+                        this.dispose();
+                    } else {
+                        JOptionPane.showMessageDialog(this, "Retiro realizado con exito");
+                        operaciones = new operaciones(t, c);
+                        operaciones.setVisible(true);
+                        this.dispose();
+                    }
+                } catch (SQLException ex) {
+                    Logger.getLogger(retiros.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            } else {
+                JOptionPane.showMessageDialog(this, "Error, solo se puede escribir multiplos de 5", "ERROR", JOptionPane.ERROR_MESSAGE);
+            }
+        }
     }//GEN-LAST:event_btnConfirmarActionPerformed
 
     private void RetiroCambiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RetiroCambiarActionPerformed
-        
+        if (operaciones != null) {
+            operaciones.setVisible(true);
+            this.dispose();
+        } else {
+            operaciones = new operaciones(t, c);
+            operaciones.setVisible(true);
+            this.dispose();
+        }
     }//GEN-LAST:event_RetiroCambiarActionPerformed
 
     private void RetiroSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RetiroSalirActionPerformed
-        
+        if (bienvenidos != null) {
+            bienvenidos.setVisible(true);
+            this.dispose();
+        } else {
+            JOptionPane.showMessageDialog(this, "VUELVA PRONTO!!", "", JOptionPane.DEFAULT_OPTION);
+            bienvenidos = new bienvenidos();
+            bienvenidos.setVisible(true);
+            this.dispose();
+        }
     }//GEN-LAST:event_RetiroSalirActionPerformed
+
+    private void RetiroImporteFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_RetiroImporteFocusLost
+        if ((esNumero(RetiroImporte.getText()) == false)) {
+            JOptionPane.showMessageDialog(this, "Error, solo se pueden escribir numeros", "ERROR", JOptionPane.ERROR_MESSAGE);
+            RetiroImporte.setText("");
+        }
+    }//GEN-LAST:event_RetiroImporteFocusLost
+
+    private void RetiroConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RetiroConfirmarActionPerformed
+        if ((esNumero(RetiroImporte.getText()) == false)) {
+            JOptionPane.showMessageDialog(this, "Error, solo se pueden escribir numeros", "ERROR", JOptionPane.ERROR_MESSAGE);
+            RetiroImporte.setText("");
+        } else {
+            if (esMultiplo(Integer.parseInt(RetiroImporte.getText())) == true) {
+                try {
+                    sentencia = conexion.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
+                    String sql = "SELECT * FROM tarjetas WHERE propietario=" + t.getPropietario() + ";";
+                    resultado = sentencia.executeQuery(sql);
+                    if (resultado.next()) {
+                        int retiro = t.getSaldo() - Integer.parseInt(RetiroImporte.getText());
+                        resultado.updateInt("saldo", retiro);
+                        resultado.updateRow();
+                        System.out.println("saldo antiguo= " + t.getSaldo() + " retiro=" + retiro);
+                    }
+                    if (operaciones != null) {
+                        operaciones.setVisible(true);
+                        this.dispose();
+                    } else {
+                        JOptionPane.showMessageDialog(this, "Retiro realizado con exito", "CONFIRMACIÓN", JOptionPane.DEFAULT_OPTION);
+                        operaciones = new operaciones(t, c);
+                        operaciones.setVisible(true);
+                        this.dispose();
+                    }
+                } catch (SQLException ex) {
+                    Logger.getLogger(retiros.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            } else {
+                JOptionPane.showMessageDialog(this, "Error, solo se puede escribir multiplos de 5", "ERROR", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+    }//GEN-LAST:event_RetiroConfirmarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -498,9 +610,8 @@ public class retiros extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton RetiroCambiar;
-    private javax.swing.JButton RetiroCcc;
     private javax.swing.JLabel RetiroCliente;
-    private javax.swing.JButton RetiroCsc;
+    private javax.swing.JButton RetiroConfirmar;
     private javax.swing.JTextField RetiroImporte;
     private javax.swing.JButton RetiroSalir;
     private javax.swing.JPanel botones;

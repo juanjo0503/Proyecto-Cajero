@@ -12,9 +12,9 @@ public class Tarjeta {
     private int numtarjeta;
     private int propietario;
     private int pin;
-    private double saldo;
+    private int saldo;
 
-    public Tarjeta(int numtarjeta, int propietario, int pin, double saldo) {
+    public Tarjeta(int numtarjeta, int propietario, int pin, int saldo) {
         this.numtarjeta = numtarjeta;
         this.propietario = propietario;
         this.pin = pin;
@@ -45,11 +45,11 @@ public class Tarjeta {
         this.pin = pin;
     }
 
-    public double getSaldo() {
+    public int getSaldo() {
         return saldo;
     }
 
-    public void setSaldo(double saldo) {
+    public void setSaldo(int saldo) {
         this.saldo = saldo;
     }
 

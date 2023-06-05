@@ -4,6 +4,8 @@
  */
 package Main;
 
+import java.util.Date;
+
 /**
  *
  * @author Administrador
@@ -12,9 +14,9 @@ public class Movimiento {
     private int idcliente;
     private String tipo;
     private double importe;
-    private String fecha;
+    private Date fecha;
 
-    public Movimiento(int idcliente, String tipo, double importe, String fecha) {
+    public Movimiento(int idcliente, String tipo, double importe, Date fecha) {
         this.idcliente = idcliente;
         this.tipo = tipo;
         this.importe = importe;
@@ -45,11 +47,11 @@ public class Movimiento {
         this.importe = importe;
     }
 
-    public String getFecha() {
+    public Date getFecha() {
         return fecha;
     }
 
-    public void setFecha(String fecha) {
+    public void setFecha(Date fecha) {
         this.fecha = fecha;
     }
 }

@@ -4,7 +4,7 @@
  */
 package Main;
 
-import Main.bienvenidos;
+import static Main.retiros.esMultiplo;
 import bd.Conexion;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -22,15 +22,26 @@ import javax.swing.Timer;
  * @author alumnoT
  */
 public class ingresos extends javax.swing.JFrame {
-    
-    
+
+    private operaciones operaciones;
+    private bienvenidos bienvenidos;
+    private Tarjeta t;
+    private Cliente c;
+
     /**
      * Creates new form main
      */
-    public ingresos() {
+    public ingresos(Tarjeta tarjeta, Cliente cliente) {
         initComponents();
+        this.t = tarjeta;
+        this.c = cliente;
         initVentana();
         initBD();
+    }
+
+    private ingresos() {
+        JOptionPane.showMessageDialog(this, "Error, debes iniciar sesion primero", "ERROR", JOptionPane.ERROR_MESSAGE);
+        System.exit(0);
     }
 
     private boolean esNumero(String s1) {
@@ -43,6 +54,8 @@ public class ingresos extends javax.swing.JFrame {
     }
 
     private void initVentana() {
+        System.out.println(t);
+        System.out.println(c);
         LocalDate hoy = LocalDate.now();
         DateTimeFormatter formato = DateTimeFormatter.ofPattern("EEEE dd/MM/yyyy");
         lblFecha2.setText(hoy.format(formato));
@@ -50,7 +63,8 @@ public class ingresos extends javax.swing.JFrame {
         LocalTime hora = LocalTime.now();
         DateTimeFormatter formato1 = DateTimeFormatter.ofPattern("HH:mm:ss");
         String sHora = hora.format(formato1);
-
+        lblHora2.setText(sHora);
+        IngresoCliente.setText(c.getNombre());
         Timer timer = new Timer(1000, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -71,6 +85,7 @@ public class ingresos extends javax.swing.JFrame {
             System.exit(0);
         }
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -115,6 +130,7 @@ public class ingresos extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(0, 0, 0));
         setForeground(new java.awt.Color(102, 102, 102));
+        setLocation(new java.awt.Point(550, 140));
         setMinimumSize(new java.awt.Dimension(800, 720));
         setResizable(false);
 
@@ -269,7 +285,7 @@ public class ingresos extends javax.swing.JFrame {
         jPanel12.add(jLabel7);
 
         IngresoConcepto.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        IngresoConcepto.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        IngresoConcepto.setHorizontalAlignment(javax.swing.JTextField.LEFT);
         IngresoConcepto.setBorder(null);
         jPanel12.add(IngresoConcepto);
 
@@ -281,6 +297,11 @@ public class ingresos extends javax.swing.JFrame {
         IngresoImporte.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         IngresoImporte.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         IngresoImporte.setBorder(null);
+        IngresoImporte.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                IngresoImporteFocusLost(evt);
+            }
+        });
         jPanel12.add(IngresoImporte);
 
         jLabel12.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
@@ -329,30 +350,33 @@ public class ingresos extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(116, 116, 116)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(numeros, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(8, 8, 8)
-                                    .addComponent(botones, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(numeros, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(8, 8, 8)
+                                .addComponent(botones, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jPanel12, javax.swing.GroupLayout.PREFERRED_SIZE, 533, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addGap(125, 125, 125))
+                                .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(60, 60, 60)
+                        .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, 642, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(98, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(lblHora2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lblFecha2, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(lblHora2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(lblFecha2, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jPanel12, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(144, 144, 144)
+                        .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(33, 33, 33)
                 .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
@@ -366,68 +390,120 @@ public class ingresos extends javax.swing.JFrame {
 
     //Teclado
     private void btn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn1ActionPerformed
-        
+
     }//GEN-LAST:event_btn1ActionPerformed
 
     private void btn2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn2ActionPerformed
-        
+
     }//GEN-LAST:event_btn2ActionPerformed
 
     private void btn3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn3ActionPerformed
-        
+
     }//GEN-LAST:event_btn3ActionPerformed
 
     private void btn4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn4ActionPerformed
-        
+
     }//GEN-LAST:event_btn4ActionPerformed
 
     private void btn5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn5ActionPerformed
-        
+
     }//GEN-LAST:event_btn5ActionPerformed
 
     private void btn6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn6ActionPerformed
-        
+
     }//GEN-LAST:event_btn6ActionPerformed
 
     private void btn7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn7ActionPerformed
-        
+
     }//GEN-LAST:event_btn7ActionPerformed
 
     private void btn8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn8ActionPerformed
-        
+
     }//GEN-LAST:event_btn8ActionPerformed
 
     private void btn9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn9ActionPerformed
-        
+
     }//GEN-LAST:event_btn9ActionPerformed
 
     private void btn0ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn0ActionPerformed
-        
+
     }//GEN-LAST:event_btn0ActionPerformed
     //Botones del teclado
     private void btnBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBorrarActionPerformed
-        
+
     }//GEN-LAST:event_btnBorrarActionPerformed
 
     private void btnRetrocederActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRetrocederActionPerformed
-        
+
     }//GEN-LAST:event_btnRetrocederActionPerformed
 
     private void btnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarActionPerformed
-        
+
     }//GEN-LAST:event_btnConfirmarActionPerformed
 
     private void IngresoCambiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_IngresoCambiarActionPerformed
-        
+        if (operaciones != null) {
+            operaciones.setVisible(true);
+            this.dispose();
+        } else {
+            operaciones = new operaciones(t, c);
+            operaciones.setVisible(true);
+            this.dispose();
+        }
     }//GEN-LAST:event_IngresoCambiarActionPerformed
 
     private void IngresoConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_IngresoConfirmarActionPerformed
-
+        if ((esNumero(IngresoImporte.getText()) == false)) {
+            JOptionPane.showMessageDialog(this, "Error, solo se pueden escribir numeros", "ERROR", JOptionPane.ERROR_MESSAGE);
+            IngresoImporte.setText("");
+        } else {
+            if (esMultiplo(Integer.parseInt(IngresoImporte.getText())) == true) {
+                try {
+                    sentencia = conexion.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
+                    String sql = "SELECT * FROM tarjetas WHERE propietario=" + t.getPropietario() + ";";
+                    resultado = sentencia.executeQuery(sql);
+                    if (resultado.next()) {
+                        int ingreso = t.getSaldo() + Integer.parseInt(IngresoImporte.getText());
+                        resultado.updateInt("saldo", ingreso);
+                        resultado.updateRow();
+                        System.out.println("saldo antiguo= " + t.getSaldo() + " ingreso=" + ingreso);
+                    }
+                    if (operaciones != null) {
+                        operaciones.setVisible(true);
+                        this.dispose();
+                    } else {
+                        JOptionPane.showMessageDialog(this, "Ingreso realizado con exito", "CONFIRMACIÓN", JOptionPane.DEFAULT_OPTION);
+                        operaciones = new operaciones(t, c);
+                        operaciones.setVisible(true);
+                        this.dispose();
+                    }
+                } catch (SQLException ex) {
+                    Logger.getLogger(retiros.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            } else {
+                JOptionPane.showMessageDialog(this, "Error, solo se puede escribir multiplos de 5", "ERROR", JOptionPane.ERROR_MESSAGE);
+            }
+        }
     }//GEN-LAST:event_IngresoConfirmarActionPerformed
 
     private void IngresoSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_IngresoSalirActionPerformed
-        
+        if (bienvenidos != null) {
+            bienvenidos.setVisible(true);
+            this.dispose();
+        } else {
+            JOptionPane.showMessageDialog(this, "VUELVA PRONTO!!", "", JOptionPane.DEFAULT_OPTION);
+            bienvenidos = new bienvenidos();
+            bienvenidos.setVisible(true);
+            this.dispose();
+        }
     }//GEN-LAST:event_IngresoSalirActionPerformed
+
+    private void IngresoImporteFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_IngresoImporteFocusLost
+        if ((esNumero(IngresoImporte.getText()) == false)) {
+            JOptionPane.showMessageDialog(this, "Error, solo se pueden escribir numeros", "ERROR", JOptionPane.ERROR_MESSAGE);
+            IngresoImporte.setText("");
+        }
+    }//GEN-LAST:event_IngresoImporteFocusLost
 
     /**
      * @param args the command line arguments

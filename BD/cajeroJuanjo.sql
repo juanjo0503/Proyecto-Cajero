@@ -1,5 +1,5 @@
-CREATE DATABASE cajeroJuanjo;
-USE cajeroJuanjo;
+CREATE DATABASE cajerojuanjo;
+USE cajerojuanjo;
 
 CREATE TABLE clientes (
     id int(5) NOT NULL,
@@ -18,14 +18,14 @@ CREATE TABLE movimientos (
     id_movimiento int(5) NOT NULL,
     id_cliente int(5) NOT NULL,
     tipo varchar(20) NOT NULL,
-    importe double(10,2) NOT NULL,
+    importe int(10) NOT NULL,
     fecha date NOT NULL
 );
 CREATE TABLE tarjetas (
     numero int(4) NOT NULL,
     propietario int(5) NOT NULL,
     pin int(4) NOT NULL,
-    saldo double(10,2) NOT NULL
+    saldo int(10) NOT NULL
 );
 
 ALTER TABLE clientes ADD CONSTRAINT pk_id PRIMARY KEY(id);
@@ -35,25 +35,25 @@ ALTER TABLE tarjetas ADD CONSTRAINT pk_numero PRIMARY KEY(numero);
 
 
 INSERT INTO clientes (id, numtarjeta, IBAN, nombre, direccion) VALUES
-(101,4485,'ES91210','Juan Perez','Calle Principal nº12'),
-(102,4916,'ES91001','Maria Rodriguez','Avenida Central nº2 1ºA'),
-(103,4567,'ES91208','Pedro Sanchez','Plaza Mayor nº32'),
-(104,4556,'ES91306','Laura Gomez','Calle Secundaria nº1 3ºC'),
-(105,4532,'ES91123','Carlos Lopez','Avenida Norte nº20');
+(101,4485,'ES91210','Juan Perez','Calle Principal n12'),
+(102,4916,'ES91001','Maria Rodriguez','Avenida Central n2 1A'),
+(103,4567,'ES91208','Pedro Sanchez','Plaza Mayor n32'),
+(104,4556,'ES91306','Laura Gomez','Calle Secundaria n1 3C'),
+(105,4532,'ES91123','Carlos Lopez','Avenida Norte n20');
 
 INSERT INTO tarjetas (numero, propietario, pin, saldo) VALUES
-(4485, 101, 4321, 1000.30),
-(4916, 102, 8765, 2500.50),
-(4567, 103, 2109, 500.25),
-(4556, 104, 6543, 150.75),
-(4532, 105, 1987, 3800.00);
+(4485, 101, 4321, 1000),
+(4916, 102, 8765, 2500),
+(4567, 103, 2109, 500),
+(4556, 104, 6543, 150),
+(4532, 105, 1987, 3800);
 
 INSERT INTO movimientos (id_movimiento, id_cliente, tipo, importe, fecha) VALUES
-(1, 101, "Ingreso", 50.00, '2023-05-15'),
-(2, 101, "Retiro", 100.00, '2023-05-18'),
-(3, 103, "Transferencia", 200.00, '2023-05-20'),
-(4, 102, "Retiro", 75.00, '2023-05-22'),
-(5, 105, "Ingreso", 30.00, '2023-05-25');
+(1, 101, "Ingreso", 50, '2023-05-15'),
+(2, 101, "Retiro", 100, '2023-05-18'),
+(3, 103, "Transferencia", 200., '2023-05-20'),
+(4, 102, "Retiro", 75, '2023-05-22'),
+(5, 105, "Ingreso", 30, '2023-05-25');
 
 
 ALTER TABLE clientes ADD CONSTRAINT fk_numtarjeta FOREIGN KEY(numtarjeta) REFERENCES tarjetas(numero);
