@@ -29,16 +29,19 @@ public class operaciones extends javax.swing.JFrame {
     private transferencias transferencia;
     private bienvenidos bienvenido;
 
-    public operaciones(Tarjeta t) {
+    public operaciones(Tarjeta tarjeta, Cliente cliente) {
         initComponents();
         this.t = tarjeta;
+        this.c = cliente;
         initVentana();
         initBD();
-        
+
     }
+
     private operaciones() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        throw new UnsupportedOperationException("Debes iniciar sesion primero");
     }
+
     private boolean esNumero(String s1) {
         for (int i = 0; i < s1.length(); i++) {
             if (Character.isDigit(s1.charAt(i))) {
@@ -50,6 +53,7 @@ public class operaciones extends javax.swing.JFrame {
 
     private void initVentana() {
         System.out.println(t);
+        System.out.println(c);
         LocalDate hoy = LocalDate.now();
         DateTimeFormatter formato = DateTimeFormatter.ofPattern("EEEE dd/MM/yyyy");
         lblFecha1.setText(hoy.format(formato));

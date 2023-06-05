@@ -9,19 +9,19 @@ package Main;
  * @author Administrador
  */
 public class Tarjeta {
-    private long numtarjeta;
+    private int numtarjeta;
     private int propietario;
     private int pin;
     private double saldo;
 
-    public Tarjeta(long numtarjeta, int propietario, int pin, double saldo) {
+    public Tarjeta(int numtarjeta, int propietario, int pin, double saldo) {
         this.numtarjeta = numtarjeta;
         this.propietario = propietario;
         this.pin = pin;
         this.saldo = saldo;
     }
 
-    public long getNumtarjeta() {
+    public int getNumtarjeta() {
         return numtarjeta;
     }
 

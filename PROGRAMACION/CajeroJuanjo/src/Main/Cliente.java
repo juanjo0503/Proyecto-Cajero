@@ -9,20 +9,30 @@ package Main;
  * @author Administrador
  */
 public class Cliente {
-
-    private long numtarjeta;
+    
+    private int id;
+    private int numtarjeta;
     private String IBAN;
     private String nombre;
     private String direccion;
 
-    public Cliente(long numtarjeta, String IBAN, String nombre, String direccion) {
+    public Cliente(int id,int numtarjeta, String IBAN, String nombre, String direccion) {
+        this.id = id;
         this.numtarjeta = numtarjeta;
         this.IBAN = IBAN;
         this.nombre = nombre;
         this.direccion = direccion;
     }
 
-    public long getNumtarjeta() {
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+    
+    public int getNumtarjeta() {
         return numtarjeta;
     }
 
@@ -54,4 +64,9 @@ public class Cliente {
         this.direccion = direccion;
     }
 
+    @Override
+    public String toString() {
+        return "Cliente{" + "id=" + id + ", numtarjeta=" + numtarjeta + ", IBAN=" + IBAN + ", nombre=" + nombre + ", direccion=" + direccion + '}';
+    }
+    
 }

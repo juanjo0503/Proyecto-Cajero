@@ -31,7 +31,6 @@ public class ingresos extends javax.swing.JFrame {
         initComponents();
         initVentana();
         initBD();
-        initDatos();
     }
 
     private boolean esNumero(String s1) {
@@ -70,25 +69,6 @@ public class ingresos extends javax.swing.JFrame {
         if (conexion == null) {
             JOptionPane.showMessageDialog(this, "Error, no se pudo conectar a la base de datos", "ERROR", JOptionPane.ERROR_MESSAGE);
             System.exit(0);
-        }
-    }
-    
-    private void initDatos() {
-        try {
-            sentencia = conexion.createStatement();
-            String sql1 = "SELECT propietario FROM tarjetas WHERE pin=;";
-            resultado = sentencia.executeQuery(sql1);
-            if (resultado.next()) {
-                sentencia2 = conexion.createStatement();
-                String sql2 = "SELECT nombre FROM clientes WHERE id=" + resultado.getString("propietario") + ";";
-                resultado2 = sentencia2.executeQuery(sql2);
-                if (resultado2.next()) {
-                    IngresoCliente.setText(resultado2.getString("nombre"));
-                }
-            }
-
-        } catch (SQLException ex) {
-            Logger.getLogger(ingresos.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     /**

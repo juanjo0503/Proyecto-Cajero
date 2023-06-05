@@ -415,7 +415,6 @@ public class cambioPIN extends javax.swing.JFrame {
     private void CambioConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CambioConfirmarActionPerformed
         
         try {
-            
                 if (CambioNP.getText().equals(CambioCP.getText())) {
                     int pinnuevo = Integer.parseInt(CambioNP.getText());
                     sentencia = conexion.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);

@@ -23,13 +23,13 @@ import javax.swing.Timer;
 public class bienvenidos extends javax.swing.JFrame {
 
     private operaciones operaciones;
-    
+
     public bienvenidos() {
         initComponents();
         initVentana();
         initBD();
     }
-    
+
     private void initVentana() {
         LocalDate hoy = LocalDate.now();
         DateTimeFormatter formato = DateTimeFormatter.ofPattern("EEEE dd/MM/yyyy");
@@ -49,7 +49,7 @@ public class bienvenidos extends javax.swing.JFrame {
         });
         timer.start();
     }
-    
+
     private boolean esNumero(String s1) {
         for (int i = 0; i < s1.length(); i++) {
             if (Character.isDigit(s1.charAt(i))) {
@@ -58,7 +58,7 @@ public class bienvenidos extends javax.swing.JFrame {
         }
         return false;
     }
-    
+
     private void initBD() {
 
         conexion = Conexion.mySQL("cajerojuanjo", "root", "");
@@ -67,6 +67,7 @@ public class bienvenidos extends javax.swing.JFrame {
             System.exit(0);
         }
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -355,7 +356,8 @@ public class bienvenidos extends javax.swing.JFrame {
     private void btnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarActionPerformed
 
         try {
-            Tarjeta tarjeta;
+            Cliente c = null;
+            Tarjeta t = null;
             String sPin = txfPin.getText();
             String sID = txfID.getText();
             if (esNumero(sID) == false || esNumero(sPin) == false) {
@@ -369,20 +371,35 @@ public class bienvenidos extends javax.swing.JFrame {
                 if (resultado.next()) {
                     int numtarjeta, propietario, pin;
                     double saldo;
+                    //DATOS DE LA TARJETA
                     numtarjeta = resultado.getInt("numero");
                     propietario = resultado.getInt("propietario");
                     pin = resultado.getInt("pin");
                     saldo = resultado.getDouble("saldo");
-                    Tarjeta t=new Tarjeta(numtarjeta,propietario,pin,saldo);
+                    t = new Tarjeta(numtarjeta, propietario, pin, saldo);
+                    //DATOS DE LA CUENTA
+                    sentencia1 = conexion.createStatement();
+                    String sql1 = "SELECT * FROM clientes WHERE id=" + sID + ";";
+                    resultado1 = sentencia1.executeQuery(sql1);
+                    if (resultado1.next()) {
+                        int id, tarjeta;
+                        String iban, nombre, direccion;
+                        id = resultado1.getInt("id");
+                        tarjeta = resultado1.getInt("numtarjeta");
+                        iban = resultado1.getString("IBAN");
+                        nombre = resultado1.getString("nombre");
+                        direccion = resultado1.getString("direccion");
+                        c = new Cliente(id, tarjeta, iban, nombre, direccion);
+                    }
                     if (operaciones != null) {
                         operaciones.setVisible(true);
                         this.dispose();
                     } else {
-                        operaciones = new operaciones(t);
+                        operaciones = new operaciones(t, c);
                         operaciones.setVisible(true);
                         this.dispose();
                     }
-                    
+
                 } else {
                     JOptionPane.showMessageDialog(this, "No hay ninguna tarjeta registrada con este pin o ID", "ERROR", JOptionPane.ERROR_MESSAGE);
                 }
@@ -457,4 +474,6 @@ public class bienvenidos extends javax.swing.JFrame {
     Connection conexion;
     Statement sentencia;
     ResultSet resultado;
+    Statement sentencia1;
+    ResultSet resultado1;
 }
