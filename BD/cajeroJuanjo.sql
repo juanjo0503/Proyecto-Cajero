@@ -27,6 +27,10 @@ CREATE TABLE tarjetas (
     pin int(4) NOT NULL,
     saldo int(10) NOT NULL
 );
+CREATE TABLE administradores (
+    id_administrador int(2) NOT NULL,
+    pinadmin int(4) NOT NULL
+);
 
 ALTER TABLE clientes ADD CONSTRAINT pk_id PRIMARY KEY(id);
 ALTER TABLE bajas ADD CONSTRAINT pk_idbajas PRIMARY KEY(id_baja);
@@ -55,6 +59,12 @@ INSERT INTO movimientos (id_movimiento, id_cliente, tipo, importe, fecha) VALUES
 (4, 102, "Retiro", 75, '2023-05-22'),
 (5, 105, "Ingreso", 30, '2023-05-25');
 
+INSERT INTO administradores (id_administrador, pinadmin) VALUES
+    (01, 1234),
+    (02, 5678),
+    (03, 9012),
+    (04, 3456),
+    (05, 7890);
 
 ALTER TABLE clientes ADD CONSTRAINT fk_numtarjeta FOREIGN KEY(numtarjeta) REFERENCES tarjetas(numero);
 ALTER TABLE bajas ADD CONSTRAINT fk_cliente FOREIGN KEY(cliente) REFERENCES clientes(id);
