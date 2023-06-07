@@ -8,9 +8,15 @@ import bd.Conexion;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.*;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Random;
+import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.Timer;
 
@@ -19,6 +25,7 @@ import javax.swing.Timer;
  * @author alumnoT
  */
 public class cambioPIN extends javax.swing.JFrame {
+
     private operaciones operaciones;
     private bienvenidos bienvenidos;
     private Tarjeta t;
@@ -432,7 +439,7 @@ public class cambioPIN extends javax.swing.JFrame {
             bienvenidos.setVisible(true);
             this.dispose();
         } else {
-            JOptionPane.showMessageDialog(this, "Vuelva Pronto!!","HASTA LUEGO",JOptionPane.DEFAULT_OPTION);
+            JOptionPane.showMessageDialog(this, "Vuelva Pronto!!", "HASTA LUEGO", JOptionPane.DEFAULT_OPTION);
             bienvenidos = new bienvenidos();
             bienvenidos.setVisible(true);
             this.dispose();
@@ -442,31 +449,58 @@ public class cambioPIN extends javax.swing.JFrame {
     private void CambioConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CambioConfirmarActionPerformed
         try {
             String sPIN = String.valueOf(t.getPin());
-            if (CambioPA.getText().equals(sPIN)) {
-                if (CambioNP.getText().equals(CambioCP.getText())) {
-                    int pinnuevo = Integer.parseInt(CambioNP.getText());
-                    t.setPin(pinnuevo);
-                    sentencia = conexion.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
-                    String sql = "SELECT * FROM tarjetas WHERE pin=" + CambioPA.getText() + ";";
-                    resultado = sentencia.executeQuery(sql);
-                    if (resultado.next()) {
-                        resultado.updateInt("pin", pinnuevo);
-                        resultado.updateRow();
-                    }
-                    if (operaciones != null) {
-                        operaciones.setVisible(true);
-                        this.dispose();
+            if ((esNumero(CambioNP.getText()) == true)) {
+                if (CambioPA.getText().equals(sPIN)) {
+                    if (CambioNP.getText().equals(CambioCP.getText())) {
+                        int pinnuevo = Integer.parseInt(CambioNP.getText());
+                        t.setPin(pinnuevo);
+                        sentencia = conexion.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
+                        String sql = "SELECT * FROM tarjetas WHERE pin=" + CambioPA.getText() + ";";
+                        resultado = sentencia.executeQuery(sql);
+                        if (resultado.next()) {
+                            resultado.updateInt("pin", pinnuevo);
+                            resultado.updateRow();
+                        }
+
+                        //crear movimiento
+                        if (operaciones != null) {
+                            operaciones.setVisible(true);
+                            this.dispose();
+                        } else {
+                            JOptionPane.showMessageDialog(this, "Se ha cambiado el PIN de forma exitosa");
+                            operaciones = new operaciones(t, c);
+                            operaciones.setVisible(true);
+                            this.dispose();
+                        }
+
+                        int num = 0;
+                        String sql3 = "Select max(id_movimiento) from movimientos";
+                        resultado = sentencia.executeQuery(sql3);
+                        if (resultado.next()) {
+                            num = resultado.getInt(1);
+                        }
+                        int id = num + 1;
+                        LocalDate fecha = LocalDate.now();
+                        java.sql.Date fechaDate = java.sql.Date.valueOf(fecha);
+                        sentencia2 = conexion.prepareStatement("INSERT INTO movimientos VALUES (?,?,?,?,?,?);");
+                        sentencia2.setInt(1, id);
+                        sentencia2.setInt(2, t.getPropietario());
+                        sentencia2.setString(3, "Cambio PIN");
+                        sentencia2.setString(4, null);
+                        sentencia2.setInt(5, 0);
+                        sentencia2.setDate(6, fechaDate);
+                        sentencia2.executeUpdate();
                     } else {
-                        JOptionPane.showMessageDialog(this, "Se ha cambiado el PIN de forma exitosa");
-                        operaciones = new operaciones(t, c);
-                        operaciones.setVisible(true);
-                        this.dispose();
+                        JOptionPane.showMessageDialog(this, "El PIN nuevo no coincide", "ERROR", JOptionPane.ERROR_MESSAGE);
                     }
                 } else {
-                    JOptionPane.showMessageDialog(this, "El PIN nuevo no coincide", "ERROR", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(this, "El PIN actual no coincide con el del inicio de sesión", "ERROR", JOptionPane.ERROR_MESSAGE);
                 }
             } else {
-                JOptionPane.showMessageDialog(this, "El PIN actual no coincide con el del inicio de sesión", "ERROR", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this, "Error, solo se pueden escribir numeros", "ERROR", JOptionPane.ERROR_MESSAGE);
+                CambioNP.setText("");
+                CambioCP.setText("");
+                CambioPA.setText("");
             }
         } catch (SQLException ex) {
         } catch (NumberFormatException ex) {
@@ -557,7 +591,7 @@ public class cambioPIN extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
     Connection conexion;
     Statement sentencia;
-    Statement sentencia2;
+    PreparedStatement sentencia2;
     ResultSet resultado;
     ResultSet resultado2;
     Tarjeta tarjeta;

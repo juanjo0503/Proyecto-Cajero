@@ -470,7 +470,7 @@ public class transferencias extends javax.swing.JFrame {
             bienvenidos.setVisible(true);
             this.dispose();
         } else {
-            JOptionPane.showMessageDialog(this, "Vuelva Pronto!!","HASTA LUEGO",JOptionPane.DEFAULT_OPTION);
+            JOptionPane.showMessageDialog(this, "Vuelva Pronto!!", "HASTA LUEGO", JOptionPane.DEFAULT_OPTION);
             bienvenidos = new bienvenidos();
             bienvenidos.setVisible(true);
             this.dispose();
@@ -516,6 +516,25 @@ public class transferencias extends javax.swing.JFrame {
                                 resultado3.updateRow();
                                 t.setSaldo(restado);
                             }
+
+                            int num = 0;
+                            String sql4 = "Select max(id_movimiento) from movimientos";
+                            resultado = sentencia.executeQuery(sql4);
+                            if (resultado.next()) {
+                                num = resultado.getInt(1);
+                            }
+                            int id = num + 1;
+                            LocalDate fecha = LocalDate.now();
+                            java.sql.Date fechaDate = java.sql.Date.valueOf(fecha);
+                            sentencia4 = conexion.prepareStatement("INSERT INTO movimientos VALUES (?,?,?,?,?,?);");
+                            sentencia4.setInt(1, id);
+                            sentencia4.setInt(2, t.getPropietario());
+                            sentencia4.setString(3, "Transferencia");
+                            sentencia4.setString(4, TransferenciaConcepto.getText());
+                            sentencia4.setInt(5, Integer.parseInt(TransferenciaImporte.getText()));
+                            sentencia4.setDate(6, fechaDate);
+                            sentencia4.executeUpdate();
+
                             if (operaciones != null) {
                                 operaciones.setVisible(true);
                                 this.dispose();
@@ -635,6 +654,7 @@ public class transferencias extends javax.swing.JFrame {
     Statement sentencia;
     Statement sentencia2;
     Statement sentencia3;
+    PreparedStatement sentencia4;
     ResultSet resultado;
     ResultSet resultado2;
     ResultSet resultado3;

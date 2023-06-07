@@ -18,6 +18,7 @@ CREATE TABLE movimientos (
     id_movimiento int(5) NOT NULL,
     id_cliente int(5) NOT NULL,
     tipo varchar(20) NOT NULL,
+    concepto varchar(30),
     importe int(10) NOT NULL,
     fecha date NOT NULL
 );
@@ -52,12 +53,12 @@ INSERT INTO tarjetas (numero, propietario, pin, saldo) VALUES
 (4556, 104, 6543, 150),
 (4532, 105, 1987, 3800);
 
-INSERT INTO movimientos (id_movimiento, id_cliente, tipo, importe, fecha) VALUES
-(1, 101, "Ingreso", 50, '2023-05-15'),
-(2, 101, "Retiro", 100, '2023-05-18'),
-(3, 103, "Transferencia", 200., '2023-05-20'),
-(4, 102, "Retiro", 75, '2023-05-22'),
-(5, 105, "Ingreso", 30, '2023-05-25');
+INSERT INTO movimientos (id_movimiento, id_cliente, tipo, concepto, importe, fecha) VALUES
+(1, 101, "Ingreso",NULL, 50, '2023-05-15'),
+(2, 101, "Retiro",NULL, 100, '2023-05-18'),
+(3, 103, "Transferencia",NULL, 200., '2023-05-20'),
+(4, 102, "Retiro",NULL, 75, '2023-05-22'),
+(5, 105, "Ingreso",NULL, 30, '2023-05-25');
 
 INSERT INTO administradores (id_administrador, pinadmin) VALUES
     (01, 1234),

@@ -342,7 +342,7 @@ public class estados extends javax.swing.JFrame {
             bienvenidos.setVisible(true);
             this.dispose();
         } else {
-            JOptionPane.showMessageDialog(this, "Vuelva Pronto!!","HASTA LUEGO",JOptionPane.DEFAULT_OPTION);
+            JOptionPane.showMessageDialog(this, "Vuelva Pronto!!", "HASTA LUEGO", JOptionPane.DEFAULT_OPTION);
             bienvenidos = new bienvenidos();
             bienvenidos.setVisible(true);
             this.dispose();
@@ -351,7 +351,18 @@ public class estados extends javax.swing.JFrame {
 
     private void EstadoImprimirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EstadoImprimirActionPerformed
         try {
-            Paragraph texto,propietario, IBAN, saldo, fecha,pie,hora;
+            
+            if (operaciones != null) {
+                operaciones.setVisible(true);
+                this.dispose();
+            } else {
+                JOptionPane.showMessageDialog(this, "Recoja el comprobante, gracias!!", "CONFIRMACIÓN", JOptionPane.DEFAULT_OPTION);
+                operaciones = new operaciones(t, c);
+                operaciones.setVisible(true);
+                this.dispose();
+            }
+            
+            Paragraph texto, propietario, IBAN, saldo, fecha, pie, hora;
             Document documento = new Document();
             documento.setPageSize(PageSize.A6.rotate());
             PdfWriter writer = PdfWriter.getInstance(documento, new java.io.FileOutputStream("estado.pdf"));
@@ -362,7 +373,7 @@ public class estados extends javax.swing.JFrame {
             fuente1.setStyle("bold");
             fuente2.setColor(BaseColor.BLUE);
             fuente3.setStyle("italic");
-            texto=new Paragraph("Comprobante del Estado de la Cuenta",fuente2);
+            texto = new Paragraph("Comprobante del Estado de la Cuenta", fuente2);
             documento.add(texto);
             propietario = new Paragraph("\nPropietario:     " + EstadoPropietario.getText(), fuente1);
             documento.add(propietario);
@@ -374,17 +385,39 @@ public class estados extends javax.swing.JFrame {
             documento.add(fecha);
             hora = new Paragraph("Hora:                " + EstadoHora.getText(), fuente1);
             documento.add(hora);
-            pie = new Paragraph("\n\n\nGracias por su visita!!!",fuente3);
+            pie = new Paragraph("\n\n\nGracias por su visita!!!", fuente3);
             documento.add(pie);
-            
+
             File file = new File("estado.pdf");
             Desktop.getDesktop().open(file);
             documento.close();
+
+            int num = 0;
+            sentencia = conexion.createStatement();
+            String sql3 = "Select max(id_movimiento) from movimientos";
+            resultado = sentencia.executeQuery(sql3);
+            if (resultado.next()) {
+                num = resultado.getInt(1);
+            }
+            int id = num + 1;
+            LocalDate fechamov = LocalDate.now();
+            java.sql.Date fechaDate = java.sql.Date.valueOf(fechamov);
+            sentencia3 = conexion.prepareStatement("INSERT INTO movimientos VALUES (?,?,?,?,?,?);");
+            sentencia3.setInt(1, id);
+            sentencia3.setInt(2, t.getPropietario());
+            sentencia3.setString(3, "Estado Cuenta");
+            sentencia3.setString(4, null);
+            sentencia3.setInt(5, 0);
+            sentencia3.setDate(6, fechaDate);
+            sentencia3.executeUpdate();
+            
         } catch (FileNotFoundException ex) {
             Logger.getLogger(estados.class.getName()).log(Level.SEVERE, null, ex);
         } catch (DocumentException ex) {
             Logger.getLogger(estados.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
+            Logger.getLogger(estados.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
             Logger.getLogger(estados.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_EstadoImprimirActionPerformed
@@ -486,6 +519,7 @@ public class estados extends javax.swing.JFrame {
     Connection conexion;
     Statement sentencia;
     Statement sentencia2;
+    PreparedStatement sentencia3;
     ResultSet resultado;
     ResultSet resultado2;
     Tarjeta tarjeta;

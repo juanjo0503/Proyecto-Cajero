@@ -468,6 +468,27 @@ public class retiros extends javax.swing.JFrame {
                         resultado.updateRow();
                         System.out.println("saldo antiguo= " + t.getSaldo() + " retiro=" + retiro);
                     }
+                    
+                    int num = 0;
+                    String sql3 = "Select max(id_movimiento) from movimientos";
+                    resultado = sentencia.executeQuery(sql3);
+                    if (resultado.next()) {
+                        num = resultado.getInt(1);
+                    }
+                    int id=num+1;
+                    LocalDate fecha = LocalDate.now();
+                    java.sql.Date fechaDate = java.sql.Date.valueOf(fecha);
+                    sentencia3 = conexion.prepareStatement("INSERT INTO movimientos VALUES (?,?,?,?,?,?);");
+                    sentencia3.setInt(1, id);
+                    sentencia3.setInt(2, t.getPropietario());
+                    sentencia3.setString(3, "Retiro");
+                    sentencia3.setString(4, null);
+                    sentencia3.setInt(5, Integer.parseInt(RetiroImporte.getText()));
+                    sentencia3.setDate(6, fechaDate);
+                    sentencia3.executeUpdate();
+                    
+                    
+                    
                     if (operaciones != null) {
                         operaciones.setVisible(true);
                         this.dispose();
@@ -532,6 +553,26 @@ public class retiros extends javax.swing.JFrame {
                         resultado.updateRow();
                         System.out.println("saldo antiguo= " + t.getSaldo() + " retiro=" + retiro);
                     }
+                    
+                    int num = 0;
+                    String sql3 = "Select max(id_movimiento) from movimientos";
+                    resultado = sentencia.executeQuery(sql3);
+                    if (resultado.next()) {
+                        num = resultado.getInt(1);
+                    }
+                    int id=num+1;
+                    LocalDate fecha = LocalDate.now();
+                    java.sql.Date fechaDate = java.sql.Date.valueOf(fecha);
+                    sentencia3 = conexion.prepareStatement("INSERT INTO movimientos VALUES (?,?,?,?,?,?);");
+                    sentencia3.setInt(1, id);
+                    sentencia3.setInt(2, t.getPropietario());
+                    sentencia3.setString(3, "Retiro");
+                    sentencia3.setString(4, null);
+                    sentencia3.setInt(5, Integer.parseInt(RetiroImporte.getText()));
+                    sentencia3.setDate(6, fechaDate);
+                    sentencia3.executeUpdate();
+                    
+                                       
                     if (operaciones != null) {
                         operaciones.setVisible(true);
                         this.dispose();
@@ -643,6 +684,7 @@ public class retiros extends javax.swing.JFrame {
     Connection conexion;
     Statement sentencia;
     Statement sentencia2;
+    PreparedStatement sentencia3;
     ResultSet resultado;
     ResultSet resultado2;
     Tarjeta tarjeta;

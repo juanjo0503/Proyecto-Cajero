@@ -11,14 +11,17 @@ import java.util.Date;
  * @author Administrador
  */
 public class Movimiento {
+
     private int idcliente;
     private String tipo;
+    private String concepto;
     private double importe;
     private Date fecha;
 
-    public Movimiento(int idcliente, String tipo, double importe, Date fecha) {
+    public Movimiento(int idcliente, String tipo, String concepto, double importe, Date fecha) {
         this.idcliente = idcliente;
         this.tipo = tipo;
+        this.concepto = concepto;
         this.importe = importe;
         this.fecha = fecha;
     }
@@ -54,4 +57,18 @@ public class Movimiento {
     public void setFecha(Date fecha) {
         this.fecha = fecha;
     }
+
+    public String getConcepto() {
+        return concepto;
+    }
+
+    public void setConcepto(String concepto) {
+        this.concepto = concepto;
+    }
+
+    @Override
+    public String toString() {
+        return "Movimiento{" + "idcliente=" + idcliente + ", tipo=" + tipo + ", concepto=" + concepto + ", importe=" + importe + ", fecha=" + fecha + '}';
+    }
+
 }
