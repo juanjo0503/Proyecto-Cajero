@@ -457,52 +457,58 @@ public class retiros extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Error, solo se pueden escribir numeros", "ERROR", JOptionPane.ERROR_MESSAGE);
             RetiroImporte.setText("");
         } else {
-            if (esMultiplo(Integer.parseInt(RetiroImporte.getText())) == true) {
-                try {
-                    sentencia = conexion.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
-                    String sql = "SELECT * FROM tarjetas WHERE propietario=" + t.getPropietario() + ";";
-                    resultado = sentencia.executeQuery(sql);
-                    if (resultado.next()) {
-                        int retiro = t.getSaldo() - Integer.parseInt(RetiroImporte.getText());
-                        resultado.updateInt("saldo", retiro);
-                        resultado.updateRow();
-                        System.out.println("saldo antiguo= " + t.getSaldo() + " retiro=" + retiro);
+            if (RetiroImporte.getText().equals("0") == false) {
+                if (esMultiplo(Integer.parseInt(RetiroImporte.getText())) == true) {
+                    if (Integer.parseInt(RetiroImporte.getText()) < t.getSaldo()) {
+                        try {
+                            sentencia = conexion.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
+                            String sql = "SELECT * FROM tarjetas WHERE propietario=" + t.getPropietario() + ";";
+                            resultado = sentencia.executeQuery(sql);
+                            if (resultado.next()) {
+                                int retiro = t.getSaldo() - Integer.parseInt(RetiroImporte.getText());
+                                resultado.updateInt("saldo", retiro);
+                                resultado.updateRow();
+                                t.setSaldo(retiro);
+                            }
+
+                            int num = 0;
+                            String sql3 = "Select max(id_movimiento) from movimientos";
+                            resultado = sentencia.executeQuery(sql3);
+                            if (resultado.next()) {
+                                num = resultado.getInt(1);
+                            }
+                            int id = num + 1;
+                            LocalDate fecha = LocalDate.now();
+                            java.sql.Date fechaDate = java.sql.Date.valueOf(fecha);
+                            sentencia3 = conexion.prepareStatement("INSERT INTO movimientos VALUES (?,?,?,?,?,?);");
+                            sentencia3.setInt(1, id);
+                            sentencia3.setInt(2, t.getPropietario());
+                            sentencia3.setString(3, "Retiro");
+                            sentencia3.setString(4, null);
+                            sentencia3.setInt(5, Integer.parseInt(RetiroImporte.getText()));
+                            sentencia3.setDate(6, fechaDate);
+                            sentencia3.executeUpdate();
+
+                            if (operaciones != null) {
+                                operaciones.setVisible(true);
+                                this.dispose();
+                            } else {
+                                JOptionPane.showMessageDialog(this, "Retiro realizado con exito");
+                                operaciones = new operaciones(t, c);
+                                operaciones.setVisible(true);
+                                this.dispose();
+                            }
+                        } catch (SQLException ex) {
+                            Logger.getLogger(retiros.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                    }else {
+                        JOptionPane.showMessageDialog(this, "Error, has introducido una cantidad superior al saldo", "ERROR", JOptionPane.ERROR_MESSAGE);
                     }
-                    
-                    int num = 0;
-                    String sql3 = "Select max(id_movimiento) from movimientos";
-                    resultado = sentencia.executeQuery(sql3);
-                    if (resultado.next()) {
-                        num = resultado.getInt(1);
-                    }
-                    int id=num+1;
-                    LocalDate fecha = LocalDate.now();
-                    java.sql.Date fechaDate = java.sql.Date.valueOf(fecha);
-                    sentencia3 = conexion.prepareStatement("INSERT INTO movimientos VALUES (?,?,?,?,?,?);");
-                    sentencia3.setInt(1, id);
-                    sentencia3.setInt(2, t.getPropietario());
-                    sentencia3.setString(3, "Retiro");
-                    sentencia3.setString(4, null);
-                    sentencia3.setInt(5, Integer.parseInt(RetiroImporte.getText()));
-                    sentencia3.setDate(6, fechaDate);
-                    sentencia3.executeUpdate();
-                    
-                    
-                    
-                    if (operaciones != null) {
-                        operaciones.setVisible(true);
-                        this.dispose();
-                    } else {
-                        JOptionPane.showMessageDialog(this, "Retiro realizado con exito");
-                        operaciones = new operaciones(t, c);
-                        operaciones.setVisible(true);
-                        this.dispose();
-                    }
-                } catch (SQLException ex) {
-                    Logger.getLogger(retiros.class.getName()).log(Level.SEVERE, null, ex);
+                } else {
+                    JOptionPane.showMessageDialog(this, "Error, solo se puede escribir multiplos de 5", "ERROR", JOptionPane.ERROR_MESSAGE);
                 }
             } else {
-                JOptionPane.showMessageDialog(this, "Error, solo se puede escribir multiplos de 5", "ERROR", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this, "Error, no se permiten operaciones de 0€", "ERROR", JOptionPane.ERROR_MESSAGE);
             }
         }
     }//GEN-LAST:event_btnConfirmarActionPerformed
@@ -523,7 +529,7 @@ public class retiros extends javax.swing.JFrame {
             bienvenidos.setVisible(true);
             this.dispose();
         } else {
-            JOptionPane.showMessageDialog(this, "Vuelva Pronto!!","HASTA LUEGO",JOptionPane.DEFAULT_OPTION);
+            JOptionPane.showMessageDialog(this, "Vuelva Pronto!!", "HASTA LUEGO", JOptionPane.DEFAULT_OPTION);
             bienvenidos = new bienvenidos();
             bienvenidos.setVisible(true);
             this.dispose();
@@ -542,51 +548,54 @@ public class retiros extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Error, solo se pueden escribir numeros", "ERROR", JOptionPane.ERROR_MESSAGE);
             RetiroImporte.setText("");
         } else {
-            if (esMultiplo(Integer.parseInt(RetiroImporte.getText())) == true) {
-                try {
-                    sentencia = conexion.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
-                    String sql = "SELECT * FROM tarjetas WHERE propietario=" + t.getPropietario() + ";";
-                    resultado = sentencia.executeQuery(sql);
-                    if (resultado.next()) {
-                        int retiro = t.getSaldo() - Integer.parseInt(RetiroImporte.getText());
-                        resultado.updateInt("saldo", retiro);
-                        resultado.updateRow();
-                        System.out.println("saldo antiguo= " + t.getSaldo() + " retiro=" + retiro);
+            if (RetiroImporte.getText().equals("0") == false) {
+                if (esMultiplo(Integer.parseInt(RetiroImporte.getText())) == true) {
+                    try {
+                        sentencia = conexion.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
+                        String sql = "SELECT * FROM tarjetas WHERE propietario=" + t.getPropietario() + ";";
+                        resultado = sentencia.executeQuery(sql);
+                        if (resultado.next()) {
+                            int retiro = t.getSaldo() - Integer.parseInt(RetiroImporte.getText());
+                            resultado.updateInt("saldo", retiro);
+                            resultado.updateRow();
+                            t.setSaldo(retiro);
+                        }
+
+                        int num = 0;
+                        String sql3 = "Select max(id_movimiento) from movimientos";
+                        resultado = sentencia.executeQuery(sql3);
+                        if (resultado.next()) {
+                            num = resultado.getInt(1);
+                        }
+                        int id = num + 1;
+                        LocalDate fecha = LocalDate.now();
+                        java.sql.Date fechaDate = java.sql.Date.valueOf(fecha);
+                        sentencia3 = conexion.prepareStatement("INSERT INTO movimientos VALUES (?,?,?,?,?,?);");
+                        sentencia3.setInt(1, id);
+                        sentencia3.setInt(2, t.getPropietario());
+                        sentencia3.setString(3, "Retiro");
+                        sentencia3.setString(4, null);
+                        sentencia3.setInt(5, Integer.parseInt(RetiroImporte.getText()));
+                        sentencia3.setDate(6, fechaDate);
+                        sentencia3.executeUpdate();
+
+                        if (operaciones != null) {
+                            operaciones.setVisible(true);
+                            this.dispose();
+                        } else {
+                            JOptionPane.showMessageDialog(this, "Retiro realizado con exito");
+                            operaciones = new operaciones(t, c);
+                            operaciones.setVisible(true);
+                            this.dispose();
+                        }
+                    } catch (SQLException ex) {
+                        Logger.getLogger(retiros.class.getName()).log(Level.SEVERE, null, ex);
                     }
-                    
-                    int num = 0;
-                    String sql3 = "Select max(id_movimiento) from movimientos";
-                    resultado = sentencia.executeQuery(sql3);
-                    if (resultado.next()) {
-                        num = resultado.getInt(1);
-                    }
-                    int id=num+1;
-                    LocalDate fecha = LocalDate.now();
-                    java.sql.Date fechaDate = java.sql.Date.valueOf(fecha);
-                    sentencia3 = conexion.prepareStatement("INSERT INTO movimientos VALUES (?,?,?,?,?,?);");
-                    sentencia3.setInt(1, id);
-                    sentencia3.setInt(2, t.getPropietario());
-                    sentencia3.setString(3, "Retiro");
-                    sentencia3.setString(4, null);
-                    sentencia3.setInt(5, Integer.parseInt(RetiroImporte.getText()));
-                    sentencia3.setDate(6, fechaDate);
-                    sentencia3.executeUpdate();
-                    
-                                       
-                    if (operaciones != null) {
-                        operaciones.setVisible(true);
-                        this.dispose();
-                    } else {
-                        JOptionPane.showMessageDialog(this, "Retiro realizado con exito", "CONFIRMACIÓN", JOptionPane.DEFAULT_OPTION);
-                        operaciones = new operaciones(t, c);
-                        operaciones.setVisible(true);
-                        this.dispose();
-                    }
-                } catch (SQLException ex) {
-                    Logger.getLogger(retiros.class.getName()).log(Level.SEVERE, null, ex);
+                } else {
+                    JOptionPane.showMessageDialog(this, "Error, solo se puede escribir multiplos de 5", "ERROR", JOptionPane.ERROR_MESSAGE);
                 }
             } else {
-                JOptionPane.showMessageDialog(this, "Error, solo se puede escribir multiplos de 5", "ERROR", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this, "Error, no se permiten operaciones de 0€", "ERROR", JOptionPane.ERROR_MESSAGE);
             }
         }
     }//GEN-LAST:event_RetiroConfirmarActionPerformed

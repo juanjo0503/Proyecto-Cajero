@@ -451,7 +451,79 @@ public class transferencias extends javax.swing.JFrame {
     }//GEN-LAST:event_btnRetrocederActionPerformed
 
     private void btnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarActionPerformed
+        if ((esNumero(TransferenciaImporte.getText()) == false)) {
+            JOptionPane.showMessageDialog(this, "Error, solo se pueden escribir numeros", "ERROR", JOptionPane.ERROR_MESSAGE);
+            TransferenciaImporte.setText("");
+        } else {
 
+            try {
+                if (esMultiplo(Integer.parseInt(TransferenciaImporte.getText())) == true) {
+                    sentencia = conexion.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
+                    String sql = "SELECT * FROM clientes WHERE IBAN='" + TransferenciaIBAN.getText() + "';";
+                    resultado = sentencia.executeQuery(sql);
+                    if (resultado.next()) {
+                        if (Integer.parseInt(TransferenciaImporte.getText()) > t.getSaldo()) {
+                            JOptionPane.showMessageDialog(this, "El importe introducido es superior al saldo actual", "ERROR", JOptionPane.ERROR_MESSAGE);
+                            TransferenciaImporte.setText("");
+                        }
+                        sentencia2 = conexion.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
+                        String sql2 = "SELECT * FROM tarjetas WHERE propietario=" + resultado.getInt("id") + ";";
+                        resultado2 = sentencia2.executeQuery(sql2);
+                        if (resultado2.next()) {
+                            int transferencia = resultado2.getInt("saldo") + Integer.parseInt(TransferenciaImporte.getText());
+                            resultado2.updateInt("saldo", transferencia);
+                            resultado2.updateRow();
+                            sentencia3 = conexion.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
+                            String sql3 = "SELECT * FROM tarjetas WHERE propietario=" + c.getId() + ";";
+                            resultado3 = sentencia3.executeQuery(sql3);
+                            if (resultado3.next()) {
+                                int restado = resultado3.getInt("saldo") - Integer.parseInt(TransferenciaImporte.getText());
+                                resultado3.updateInt("saldo", restado);
+                                resultado3.updateRow();
+                                t.setSaldo(restado);
+                            }
+
+                            int num = 0;
+                            String sql4 = "Select max(id_movimiento) from movimientos";
+                            resultado = sentencia.executeQuery(sql4);
+                            if (resultado.next()) {
+                                num = resultado.getInt(1);
+                            }
+                            int id = num + 1;
+                            LocalDate fecha = LocalDate.now();
+                            java.sql.Date fechaDate = java.sql.Date.valueOf(fecha);
+                            sentencia4 = conexion.prepareStatement("INSERT INTO movimientos VALUES (?,?,?,?,?,?);");
+                            sentencia4.setInt(1, id);
+                            sentencia4.setInt(2, t.getPropietario());
+                            sentencia4.setString(3, "Transferencia");
+                            sentencia4.setString(4, TransferenciaConcepto.getText());
+                            sentencia4.setInt(5, Integer.parseInt(TransferenciaImporte.getText()));
+                            sentencia4.setDate(6, fechaDate);
+                            sentencia4.executeUpdate();
+
+                            if (operaciones != null) {
+                                operaciones.setVisible(true);
+                                this.dispose();
+                            } else {
+                                JOptionPane.showMessageDialog(this, "Transferencia realizada con exito", "CONFIRMACIÓN", JOptionPane.DEFAULT_OPTION);
+                                operaciones = new operaciones(t, c);
+                                operaciones.setVisible(true);
+                                this.dispose();
+                            }
+                        }
+                    } else {
+                        JOptionPane.showMessageDialog(this, "No se encontro ningun usuario con ese IBAN", "ERROR", JOptionPane.ERROR_MESSAGE);
+                        TransferenciaIBAN.setText("");
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(this, "Error, solo se puede escribir multiplos de 5", "ERROR", JOptionPane.ERROR_MESSAGE);
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(transferencias.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (NumberFormatException ex) {
+            }
+
+        }
     }//GEN-LAST:event_btnConfirmarActionPerformed
 
     private void TransferenciaCambiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TransferenciaCambiarActionPerformed

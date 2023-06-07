@@ -54,8 +54,6 @@ public class operaciones extends javax.swing.JFrame {
     }
 
     private void initVentana() {
-        System.out.println(t);
-        System.out.println(c);
         LocalDate hoy = LocalDate.now();
         DateTimeFormatter formato = DateTimeFormatter.ofPattern("EEEE dd/MM/yyyy");
         lblFecha1.setText(hoy.format(formato));

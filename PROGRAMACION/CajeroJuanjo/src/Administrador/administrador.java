@@ -4,8 +4,11 @@
  */
 package Administrador;
 
+import Cajero.operaciones;
 import bd.Conexion;
 import java.sql.*;
+import java.time.LocalDate;
+import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -13,13 +16,12 @@ import javax.swing.table.DefaultTableModel;
 
 public class administrador extends javax.swing.JFrame {
 
-    /**
-     * Creates new form administrador
-     */
+    private Cajero.bienvenidos bienvenidos;
+    
     public administrador() {
         initComponents();
         initBD();
-        initTabla();
+        verDatos();
     }
 
     private boolean esNumero(String s1) {
@@ -39,7 +41,7 @@ public class administrador extends javax.swing.JFrame {
         }
     }
 
-    private void initTabla() {
+    private void verDatos() {
         try {
             //tabla Clientes
             modelo = (DefaultTableModel) tablaClientes.getModel();
@@ -139,13 +141,32 @@ public class administrador extends javax.swing.JFrame {
         BajaTarjeta = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         BajaIBAN = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
+        BajaMotivo = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+        BajaObservaciones = new javax.swing.JTextField();
         BajaConfirmar = new javax.swing.JButton();
+        CambiarPIN = new javax.swing.JPanel();
+        jPanel3 = new javax.swing.JPanel();
+        jLabel6 = new javax.swing.JLabel();
+        CambioID = new javax.swing.JTextField();
+        jLabel7 = new javax.swing.JLabel();
+        CambioPIN = new javax.swing.JTextField();
+        CambioConfirmar = new javax.swing.JButton();
+        Salir = new javax.swing.JPanel();
+        btnSalir = new javax.swing.JButton();
+        jLabel8 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setLocation(new java.awt.Point(550, 140));
         setMinimumSize(new java.awt.Dimension(801, 458));
-        setPreferredSize(new java.awt.Dimension(801, 458));
         setResizable(false);
+
+        tablas.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tablasMouseClicked(evt);
+            }
+        });
 
         clientes.setMinimumSize(new java.awt.Dimension(801, 419));
         clientes.setPreferredSize(new java.awt.Dimension(801, 419));
@@ -230,11 +251,17 @@ public class administrador extends javax.swing.JFrame {
         jScrollPane3.setViewportView(tablaMovimientos);
         if (tablaMovimientos.getColumnModel().getColumnCount() > 0) {
             tablaMovimientos.getColumnModel().getColumn(0).setResizable(false);
+            tablaMovimientos.getColumnModel().getColumn(0).setHeaderValue("Identificador");
             tablaMovimientos.getColumnModel().getColumn(1).setResizable(false);
+            tablaMovimientos.getColumnModel().getColumn(1).setHeaderValue("Propietario");
             tablaMovimientos.getColumnModel().getColumn(2).setResizable(false);
+            tablaMovimientos.getColumnModel().getColumn(2).setHeaderValue("Tipo");
             tablaMovimientos.getColumnModel().getColumn(3).setResizable(false);
+            tablaMovimientos.getColumnModel().getColumn(3).setHeaderValue("Concepto");
             tablaMovimientos.getColumnModel().getColumn(4).setResizable(false);
+            tablaMovimientos.getColumnModel().getColumn(4).setHeaderValue("Importe");
             tablaMovimientos.getColumnModel().getColumn(5).setResizable(false);
+            tablaMovimientos.getColumnModel().getColumn(5).setHeaderValue("Fecha");
         }
 
         javax.swing.GroupLayout movimientosLayout = new javax.swing.GroupLayout(movimientos);
@@ -306,7 +333,7 @@ public class administrador extends javax.swing.JFrame {
 
         tablas.addTab("Bajas", bajas);
 
-        jPanel1.setLayout(new java.awt.GridLayout(3, 0));
+        jPanel1.setLayout(new java.awt.GridLayout(5, 0));
 
         jLabel1.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         jLabel1.setText("ID de cliente:");
@@ -328,6 +355,20 @@ public class administrador extends javax.swing.JFrame {
 
         BajaIBAN.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         jPanel1.add(BajaIBAN);
+
+        jLabel2.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        jLabel2.setText("Motivo");
+        jPanel1.add(jLabel2);
+
+        BajaMotivo.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        jPanel1.add(BajaMotivo);
+
+        jLabel3.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        jLabel3.setText("Observaciones");
+        jPanel1.add(jLabel3);
+
+        BajaObservaciones.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        jPanel1.add(BajaObservaciones);
 
         BajaConfirmar.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         BajaConfirmar.setText("Confirmar");
@@ -362,6 +403,92 @@ public class administrador extends javax.swing.JFrame {
 
         tablas.addTab("Dar de Baja", darBaja);
 
+        jPanel3.setLayout(new java.awt.GridLayout(2, 0, 20, 0));
+
+        jLabel6.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        jLabel6.setText("ID Cliente:");
+        jPanel3.add(jLabel6);
+
+        CambioID.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        jPanel3.add(CambioID);
+
+        jLabel7.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        jLabel7.setText("Nuevo PIN:");
+        jPanel3.add(jLabel7);
+
+        CambioPIN.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        jPanel3.add(CambioPIN);
+
+        CambioConfirmar.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        CambioConfirmar.setText("Confirmar");
+        CambioConfirmar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CambioConfirmarActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout CambiarPINLayout = new javax.swing.GroupLayout(CambiarPIN);
+        CambiarPIN.setLayout(CambiarPINLayout);
+        CambiarPINLayout.setHorizontalGroup(
+            CambiarPINLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, CambiarPINLayout.createSequentialGroup()
+                .addContainerGap(158, Short.MAX_VALUE)
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 495, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(148, 148, 148))
+            .addGroup(CambiarPINLayout.createSequentialGroup()
+                .addGap(299, 299, 299)
+                .addComponent(CambioConfirmar, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        CambiarPINLayout.setVerticalGroup(
+            CambiarPINLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(CambiarPINLayout.createSequentialGroup()
+                .addGap(53, 53, 53)
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(60, 60, 60)
+                .addComponent(CambioConfirmar, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(73, Short.MAX_VALUE))
+        );
+
+        tablas.addTab("Cambiar PIN", CambiarPIN);
+
+        btnSalir.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        btnSalir.setText("SALIR");
+        btnSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSalirActionPerformed(evt);
+            }
+        });
+
+        jLabel8.setFont(new java.awt.Font("Arial", 2, 18)); // NOI18N
+        jLabel8.setText("Hasta la proxima!!!");
+
+        javax.swing.GroupLayout SalirLayout = new javax.swing.GroupLayout(Salir);
+        Salir.setLayout(SalirLayout);
+        SalirLayout.setHorizontalGroup(
+            SalirLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(SalirLayout.createSequentialGroup()
+                .addGroup(SalirLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(SalirLayout.createSequentialGroup()
+                        .addGap(230, 230, 230)
+                        .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 309, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(SalirLayout.createSequentialGroup()
+                        .addGap(308, 308, 308)
+                        .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(262, Short.MAX_VALUE))
+        );
+        SalirLayout.setVerticalGroup(
+            SalirLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, SalirLayout.createSequentialGroup()
+                .addGap(96, 96, 96)
+                .addComponent(jLabel8)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 106, Short.MAX_VALUE)
+                .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(116, 116, 116))
+        );
+
+        tablas.addTab("Salir", Salir);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -385,9 +512,16 @@ public class administrador extends javax.swing.JFrame {
             IBAN = BajaIBAN.getText();
 
             if (esNumero(BajaCliente.getText()) == true && esNumero(BajaTarjeta.getText()) == true) {
+                Random random = new Random();
+                int idbaja = random.nextInt(1000 - 0 + 1) + 0;
+                String foraneasoff = "SET FOREIGN_KEY_CHECKS = 0;";
+                String foraneason = "SET FOREIGN_KEY_CHECKS = 1;";
                 String sql = "DELETE FROM clientes WHERE id=? and IBAN=? ;";
                 String sql2 = "DELETE FROM tarjetas WHERE numero=? ;";
                 String sql3 = "DELETE FROM movimientos WHERE id_cliente=? ;";
+                String addbaja = "INSERT INTO bajas VALUES (?,?,?,?);";
+                sentencia = conexion.prepareStatement(foraneasoff);
+                sentencia.executeUpdate();
                 sentencia = conexion.prepareStatement(sql3);
                 sentencia.setInt(1, id);
                 sentencia.executeUpdate();
@@ -398,14 +532,68 @@ public class administrador extends javax.swing.JFrame {
                 sentencia.setInt(1, id);
                 sentencia.setString(2, IBAN);
                 sentencia.executeUpdate();
+                sentencia = conexion.prepareStatement(addbaja);
+                sentencia.setInt(1, idbaja);
+                sentencia.setInt(2, id);
+                sentencia.setString(3, BajaMotivo.getText());
+                sentencia.setString(4, BajaObservaciones.getText());
+                sentencia.executeUpdate();
+                sentencia = conexion.prepareStatement(foraneason);
+                sentencia.executeUpdate();
                 JOptionPane.showMessageDialog(this, "Borrado realizado con exito", "CONFIRMACIÓN", JOptionPane.DEFAULT_OPTION);
-            }else {
-                JOptionPane.showMessageDialog(this, "Has escrito letras donde no debes","ERROR",JOptionPane.ERROR_MESSAGE);
+            } else {
+                JOptionPane.showMessageDialog(this, "Has escrito letras donde no debes", "ERROR", JOptionPane.ERROR_MESSAGE);
             }
         } catch (SQLException ex) {
-            Logger.getLogger(administrador.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(this, "Has introducido algun dato de forma erronea", "ERROR", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_BajaConfirmarActionPerformed
+
+    private void tablasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablasMouseClicked
+        verDatos();
+    }//GEN-LAST:event_tablasMouseClicked
+
+    private void CambioConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CambioConfirmarActionPerformed
+        try {
+            if ((esNumero(CambioPIN.getText()) == true)) {
+                int pinnuevo = Integer.parseInt(CambioPIN.getText());
+                sentenciaPIN = conexion.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
+                String sql = "SELECT * FROM tarjetas WHERE propietario=" + CambioID.getText() + ";";
+                resultado = sentenciaPIN.executeQuery(sql);
+                if (resultado.next()) {
+                    resultado.updateInt("pin", pinnuevo);
+                    resultado.updateRow();
+                    JOptionPane.showMessageDialog(this, "Cambio de PIN realizado con exito","CONFIRMACIÓN",JOptionPane.DEFAULT_OPTION);
+                    CambioID.setText("");
+                    CambioPIN.setText("");
+                }else {
+                    JOptionPane.showMessageDialog(this, "Error, los datos no coinciden con existentes", "ERROR", JOptionPane.ERROR_MESSAGE);
+                    CambioID.setText("");
+                    CambioPIN.setText("");
+                }
+                
+                
+            } else {
+                JOptionPane.showMessageDialog(this, "Error, solo se pueden escribir numeros", "ERROR", JOptionPane.ERROR_MESSAGE);
+                CambioPIN.setText("");
+                CambioID.setText("");
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(this, "Error, los datos no coinciden con existentes", "ERROR", JOptionPane.ERROR_MESSAGE);
+        } catch (NumberFormatException ex) {
+        }
+    }//GEN-LAST:event_CambioConfirmarActionPerformed
+
+    private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
+        if (bienvenidos != null) {
+                            bienvenidos.setVisible(true);
+                            this.dispose();
+                        } else {
+                            bienvenidos = new Cajero.bienvenidos();
+                            bienvenidos.setVisible(true);
+                            this.dispose();
+                        }
+    }//GEN-LAST:event_btnSalirActionPerformed
 
     /**
      * @param args the command line arguments
@@ -446,14 +634,28 @@ public class administrador extends javax.swing.JFrame {
     private javax.swing.JTextField BajaCliente;
     private javax.swing.JButton BajaConfirmar;
     private javax.swing.JTextField BajaIBAN;
+    private javax.swing.JTextField BajaMotivo;
+    private javax.swing.JTextField BajaObservaciones;
     private javax.swing.JTextField BajaTarjeta;
+    private javax.swing.JPanel CambiarPIN;
+    private javax.swing.JButton CambioConfirmar;
+    private javax.swing.JTextField CambioID;
+    private javax.swing.JTextField CambioPIN;
+    private javax.swing.JPanel Salir;
     private javax.swing.JPanel bajas;
+    private javax.swing.JButton btnSalir;
     private javax.swing.JPanel clientes;
     private javax.swing.JPanel darBaja;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
@@ -466,5 +668,6 @@ public class administrador extends javax.swing.JFrame {
     private DefaultTableModel modelo;
     private Connection conexion;
     private PreparedStatement sentencia;
+    private Statement sentenciaPIN;
     private ResultSet resultado;
 }
